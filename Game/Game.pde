@@ -38,7 +38,6 @@ void setup()
    rect(0,600,1200,150);
 }
 
-
-
 void draw() {}
+void getTick() {} // draw processes ticks 60 times a second, just return tick/60
 void randomSunDrop() {}
