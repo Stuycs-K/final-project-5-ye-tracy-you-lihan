@@ -14,7 +14,7 @@ info
 
 ### 05/22
 
-info
+Finished phase I and II ; background/grid dimensions/ticks/movement
 
 ### 05/23
 
