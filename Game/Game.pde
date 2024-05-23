@@ -5,11 +5,12 @@ int suns;
 Entity[][] plants;
 ArrayList<Entity> zombies;
 ArrayList<Sun> randSuns;
+
 Entity[] menu;
 Sun x;
 
 // -------------------------------------------------------------------------
-PImage sun;
+PImage sun, pea, peaShooter, sunflower, zombie;
 // -------------------------------------------------------------------------
 
 void draw() 
@@ -72,9 +73,51 @@ void drawBackground()
    rect(0,600,1200,150);
 }
 
+<<<<<<< HEAD
+=======
+// --------------------------------------------------------------------------------------------------------------
+Display methods
+// --------------------------------------------------------------------------------------------------------------
+void displayPeashooter(int x, int y) {
+  peaShooter = loadImage("peaShooter.jpg");
+  peaShooter.resize(80, 80);
+  image(pea,x,y);
+}
+
+void displayPea(int x, int y) {
+  pea = loadImage("pea.jpg");
+  pea.resize(40, 40);
+  image(pea,x,y);
+}
+
+void displayZombie(int x, int y) {
+  zombie = loadImage("zombie.jpg");
+  zombie.resize(90, 90);
+  image(zombie, x, y);
+}
+// --------------------------------------------------------------------------------------------------------------
+
+>>>>>>> 41356b90b9f464117579897dd4d81f8524787225
 void randomSunDrop() 
 {
   //x = new Sun(500,100,0,10, sun);
   image(sun,x.pos.x, x.pos.y);
   x.move(x.pos, x.vel, "D");
 }
+<<<<<<< HEAD
+=======
+
+// --------------------------------------------------------------------------------------------------------------
+
+void display(PVector position, int size, PImage img) 
+{
+  img.resize(size,size);
+  image(img, position.x, position.y);
+}
+
+// --------------------------------------------------------------------------------------------------------------
+
+void firePea() {
+  PImage 
+}
+>>>>>>> 41356b90b9f464117579897dd4d81f8524787225
