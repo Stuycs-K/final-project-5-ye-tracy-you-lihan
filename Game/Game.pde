@@ -6,6 +6,7 @@ Entity[][] plants;
 ArrayList<Entity> zombies;
 ArrayList<Sun> randSuns;
 Entity[] menu;
+Sun x;
 
 // -------------------------------------------------------------------------
 PImage sun;
@@ -13,8 +14,11 @@ PImage sun;
 
 void draw() 
 {
+  drawBackground();
   tick++;
   randomSunDrop();
+  x.move(x.pos, x.vel, "D");
+  println(x.pos);
 }
 
 
@@ -24,9 +28,8 @@ void setup()
   size (1200,750);
   drawBackground();
   
-  // ------------------
-  
   sun = loadImage("sun.gif");
+  x = new Sun(500,100,0,10);
 }
 
 
@@ -69,29 +72,9 @@ void drawBackground()
    rect(0,600,1200,150);
 }
 
-void displayPeashooter(int x, int y) {
-  //pea = loadImage("peaShooter.jpg");
-  peaShooter.resize(40, 40);
-  image(pea,x,y);
-}
-
-void displayPea(int x, int y) {
-  //pea = loadImage("pea.jpg");
-  pea.resize(40, 40);
-  image(pea,x,y);
-}
-
 void randomSunDrop() 
 {
-  Sun x = new Sun(500,100,0,10);
-  x.display(x.pos, 75, sun);
+  //x = new Sun(500,100,0,10, sun);
+  image(sun,x.pos.x, x.pos.y);
   x.move(x.pos, x.vel, "D");
-}
-
-
-
-void display(PVector position, int size, PImage img) 
-{
-  img.resize(size,size);
-  image(img, position.x, position.y);
 }
