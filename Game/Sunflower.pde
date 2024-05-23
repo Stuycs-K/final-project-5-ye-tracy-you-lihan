@@ -1,0 +1,3 @@
+class Sunflower extends Entity {
+  
+}
