@@ -1,0 +1,3 @@
+class PeaShooter extends Entity {
+  
+}

@@ -1,0 +1,3 @@
+class Pea extends PeaShooter {
+  
+}

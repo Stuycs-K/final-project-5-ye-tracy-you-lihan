@@ -1,0 +1,3 @@
+class Zombie extends Entity {
+  
+}
