@@ -60,6 +60,16 @@ void drawBackground()
    rect(0,600,1200,150);
 }
 
+void displayPeashooter(int x, int y) {
+  //pea = loadImage("peaShooter.jpg");
+  peaShooter.resize(40, 40);
+  image(pea,x,y);
+}
 
+void displayPea(int x, int y) {
+  //pea = loadImage("pea.jpg");
+  pea.resize(40, 40);
+  image(pea,x,y);
+}
 
 void randomSunDrop() {}
