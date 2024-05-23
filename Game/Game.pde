@@ -2,22 +2,31 @@ import java.util.*;
 
 double tick;
 int suns;
-// Entity[][] plants;
-// ArrayList<Entity> zombies;
-// Entity[] menu;
+Entity[][] plants;
+ArrayList<Entity> zombies;
+ArrayList<Sun> randSuns;
+Entity[] menu;
+
+// -------------------------------------------------------------------------
+PImage sun;
+// -------------------------------------------------------------------------
+
+void draw() 
+{
+  tick++;
+  randomSunDrop();
+}
+
 
 void setup() 
 {
   frameRate(60);
   size (1200,750);
   drawBackground();
-}
-
-
-
-void draw() 
-{
-  tick++;
+  
+  // ------------------
+  
+  sun = loadImage("sun.gif");
 }
 
 
@@ -62,4 +71,17 @@ void drawBackground()
 
 
 
-void randomSunDrop() {}
+void randomSunDrop() 
+{
+  Sun x = new Sun(500,100,0,10);
+  x.display(x.pos, 75, sun);
+  x.move(x.pos, x.vel, "D");
+}
+
+
+
+void display(PVector position, int size, PImage img) 
+{
+  img.resize(size,size);
+  image(img, position.x, position.y);
+}
