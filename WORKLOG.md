@@ -1,22 +1,21 @@
 # Work Log
 
-## GROUP MEMBER 1
+## LI Han (Eric) You
 
-### date x
+### 05/22
+wrote abstract class Entity and its neccasry methods and variables. wrote contrustor for subclass and neccasry variables.
 
-info
-
-### date y
-
-info
-
-
-## GROUP MEMBER 2
-
-### date x
+### 05/23
 
 info
 
-### date y
+
+## Tracy Ye
+
+### 05/22
+
+info
+
+### 05/23
 
 info
