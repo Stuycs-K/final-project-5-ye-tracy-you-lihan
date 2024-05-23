@@ -1,3 +1,3 @@
-class Zombie extends Entity {
+//class Zombie extends Entity {
   
-}
+//}

@@ -8,9 +8,30 @@ int suns;
 
 void setup() 
 {
-      // Background  
   frameRate(60);
   size (1200,750);
+  drawBackground();
+}
+
+
+
+void draw() 
+{
+  tick++;
+}
+
+
+
+double getTick()       //  **** When calling a skill every x seconds, call with 
+{                      //  getTick()%x == 0 & keep in mind that it's a double ****
+  return tick/60;
+}
+
+
+
+void drawBackground() 
+{
+      // Background  
   background(#f7efda);
   
       // fence
@@ -37,21 +58,6 @@ void setup()
    stroke(#d1b38a);
    fill(#d1b38a);
    rect(0,600,1200,150);
-}
-
-
-
-void draw() 
-{
-  tick++;
-  println(getTick());
-}
-
-
-
-double getTick()       //  **** When calling a skill every x seconds, call with 
-{                      //  getTick()%x == 0 & keep in mind that it's a double ****
-  return tick/60;
 }
 
 
