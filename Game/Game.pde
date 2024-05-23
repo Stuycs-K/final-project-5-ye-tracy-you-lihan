@@ -1,6 +1,6 @@
 import java.util.*;
 
-int tick;
+double tick;
 int suns;
 // Entity[][] plants;
 // ArrayList<Entity> zombies;
@@ -9,6 +9,7 @@ int suns;
 void setup() 
 {
       // Background  
+  frameRate(60);
   size (1200,750);
   background(#f7efda);
   
@@ -38,6 +39,21 @@ void setup()
    rect(0,600,1200,150);
 }
 
-void draw() {}
-void getTick() {} // draw processes ticks 60 times a second, just return tick/60
+
+
+void draw() 
+{
+  tick++;
+  println(getTick());
+}
+
+
+
+double getTick()       //  **** When calling a skill every x seconds, call with 
+{                      //  getTick()%x == 0 & keep in mind that it's a double ****
+  return tick/60;
+}
+
+
+
 void randomSunDrop() {}
