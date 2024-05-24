@@ -18,4 +18,4 @@ Finished phase I and II ; background/grid dimensions/ticks/movement
 
 ### 05/23
 
-info
+working on display and sun
