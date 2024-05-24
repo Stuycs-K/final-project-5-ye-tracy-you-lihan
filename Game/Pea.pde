@@ -1,7 +1,7 @@
-class Pea extends PeaShooter {
-  private PVector position, velocity;
+//class Pea {
+//  private PVector position, velocity;
   
-  Pea() {
+//  Pea() {
     
-  }
-}
+//  }
+//}

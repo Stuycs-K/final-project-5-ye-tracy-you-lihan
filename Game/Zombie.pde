@@ -1,7 +1,7 @@
 
-class Zombie extends Entity {
-  Zombie(){
-    super("zombie", 180, 100, 0);
-  }
+//class Zombie {
+//  Zombie(){
+//    super("zombie", 180, 100, 0);
+//  }
   
-}
+//}

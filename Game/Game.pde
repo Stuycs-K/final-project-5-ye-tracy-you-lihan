@@ -1,25 +1,27 @@
 import java.util.*;
 
-double tick;
-int suns;
-Entity[][] plants;
-ArrayList<Entity> zombies;
-ArrayList<Sun> randSuns;
+static double tick;
+static int suns;
+static Entity[][] plants;
+static ArrayList<Entity> zombies;
+static ArrayList<Sun> allSuns;
 
 Entity[] menu;
-Sun x;
 
 // -------------------------------------------------------------------------
-PImage sun, pea, peaShooter, sunflower, zombie;
+PImage sun;
 // -------------------------------------------------------------------------
 
 void draw() 
 {
   drawBackground();
   tick++;
+  
   randomSunDrop();
-  x.move(x.pos, x.vel, "D");
-  println(x.pos);
+  for (Sun s : allSuns) {
+    s.display();
+    s.pos = move(s.pos, s.vel, "D");
+  }
 }
 
 
@@ -29,8 +31,10 @@ void setup()
   size (1200,750);
   drawBackground();
   
+  allSuns = new ArrayList<Sun>();
+  
   sun = loadImage("sun.gif");
-  x = new Sun(500,100,0,10);
+  sun.resize(75,75);
 }
 
 
@@ -73,51 +77,37 @@ void drawBackground()
    rect(0,600,1200,150);
 }
 
-<<<<<<< HEAD
-=======
-// --------------------------------------------------------------------------------------------------------------
-Display methods
-// --------------------------------------------------------------------------------------------------------------
-void displayPeashooter(int x, int y) {
-  peaShooter = loadImage("peaShooter.jpg");
-  peaShooter.resize(80, 80);
-  image(pea,x,y);
-}
 
-void displayPea(int x, int y) {
-  pea = loadImage("pea.jpg");
-  pea.resize(40, 40);
-  image(pea,x,y);
-}
-
-void displayZombie(int x, int y) {
-  zombie = loadImage("zombie.jpg");
-  zombie.resize(90, 90);
-  image(zombie, x, y);
-}
-// --------------------------------------------------------------------------------------------------------------
-
->>>>>>> 41356b90b9f464117579897dd4d81f8524787225
 void randomSunDrop() 
 {
-  //x = new Sun(500,100,0,10, sun);
-  image(sun,x.pos.x, x.pos.y);
-  x.move(x.pos, x.vel, "D");
+  if (getTick()%1 == 0) {
+    allSuns.add(new Sun((int)random(200,1100),0,0,5,sun));
+  }
+    
+    
+    // -----
+  //Sun x = new Sun(500,500,0,10,sun);
+  //x.display();
+  //x.pos = move(x.pos, x.vel, "D");
+  //println(x.pos);
 }
-<<<<<<< HEAD
-=======
 
-// --------------------------------------------------------------------------------------------------------------
-
-void display(PVector position, int size, PImage img) 
+public static PVector move(PVector position, PVector velocity, String dir) 
 {
-  img.resize(size,size);
-  image(img, position.x, position.y);
+  if (dir.equals("L")) {
+    return position.add(PVector.mult(velocity,-1));
+  }
+  else if (dir.equals("R")) {
+    return position.add(velocity);
+  }
+  else if (dir.equals("D")) {
+    return position.add(velocity);
+  }
+  else if (dir.equals("U")) {
+    return position.add(PVector.mult(velocity,-1));
+  }
+  else {
+    println("invalid direction");
+    return position;
+  }
 }
-
-// --------------------------------------------------------------------------------------------------------------
-
-void firePea() {
-  PImage 
-}
->>>>>>> 41356b90b9f464117579897dd4d81f8524787225
