@@ -18,9 +18,20 @@ void draw()
   tick++;
   
   randomSunDrop();
-  for (Sun s : allSuns) {
+  for (int i = 0; i < allSuns.size(); i++) {
+    Sun s = allSuns.get(i);
     s.display();
-    s.pos = move(s.pos, s.vel, "D");
+    if (s.stopPoint >= s.pos.y) {
+      s.pos = move(s.pos, s.vel, "D");
+    }
+    if (mousePressed) {
+      if (mouseX > s.pos.x && mouseX < s.pos.x+75 && mouseY > s.pos.y && mouseY < s.pos.y+75) {
+        allSuns.remove(s);
+        i--;
+        suns += 25;
+        println(suns);
+      }
+    }
   }
 }
 
@@ -32,6 +43,7 @@ void setup()
   drawBackground();
   
   allSuns = new ArrayList<Sun>();
+  suns = 0;
   
   sun = loadImage("sun.gif");
   sun.resize(75,75);
@@ -80,8 +92,8 @@ void drawBackground()
 
 void randomSunDrop() 
 {
-  if (getTick()%1 == 0) {
-    allSuns.add(new Sun((int)random(200,1100),0,0,5,sun));
+  if (getTick()%8 == 0) {
+    allSuns.add(new Sun((int)random(250,1000),0,0,5,sun));
   }
     
     
