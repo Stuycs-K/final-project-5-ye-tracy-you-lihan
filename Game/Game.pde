@@ -5,17 +5,22 @@ static int suns;
 static Entity[][] plants;
 static ArrayList<Entity> zombies;
 static ArrayList<Sun> allSuns;
-
-Entity[] menu;
+static Entity[] menu;
 
 // -------------------------------------------------------------------------
-PImage sun;
+static PImage sun;
+static PImage sunflower;
 // -------------------------------------------------------------------------
 
 void draw() 
 {
   drawBackground();
+  drawMenu();
   tick++;
+  
+  Sunflower x = new Sunflower(4, 2);
+  x.display();
+  x.skill();
   
   randomSunDrop();
   for (int i = 0; i < allSuns.size(); i++) {
@@ -28,8 +33,7 @@ void draw()
       if (mouseX > s.pos.x && mouseX < s.pos.x+75 && mouseY > s.pos.y && mouseY < s.pos.y+75) {
         allSuns.remove(s);
         i--;
-        suns += 25;
-        println(suns);
+        suns += 50;
       }
     }
   }
@@ -44,9 +48,14 @@ void setup()
   
   allSuns = new ArrayList<Sun>();
   suns = 0;
+  plants = new Entity[9][5];
+  menu = new Entity[1];
+  menu[0] = new Sunflower();
   
   sun = loadImage("sun.gif");
   sun.resize(75,75);
+  sunflower = loadImage("sunflower.png");
+  sunflower.resize(90, 90);
 }
 
 
@@ -89,19 +98,28 @@ void drawBackground()
    rect(0,600,1200,150);
 }
 
-
 void randomSunDrop() 
 {
-  if (getTick()%8 == 0) {
-    allSuns.add(new Sun((int)random(250,1000),0,0,5,sun));
+  if (getTick()%10 == 0) {
+    allSuns.add(new Sun((int)random(250,1000),0,0,5));
   }
-    
-    
-    // -----
-  //Sun x = new Sun(500,500,0,10,sun);
-  //x.display();
-  //x.pos = move(x.pos, x.vel, "D");
-  //println(x.pos);
+}
+
+void drawMenu()
+{
+  fill(#e6dcc3);
+  rect(25,625,200,100);
+  fill(0, 100);
+  textSize(22);
+  for (Entity x : menu) {
+    text(x.getName(), 125, 655);
+    image(sunflower, 30, 630);
+    if (suns < x.getCost()) {
+      fill(#ff0000, 150);
+    }
+    textSize(50);
+    text(x.getCost(), 145, 705);
+  }
 }
 
 public static PVector move(PVector position, PVector velocity, String dir) 

@@ -3,13 +3,11 @@ import java.util.*;
 public class Sun {
   PVector pos;
   PVector vel;
-  PImage sun;
   int stopPoint;
   
-  public Sun(int x, int y, int vx, int vy, PImage img) {
+  public Sun(int x, int y, int vx, int vy) {
     pos = new PVector(x,y);
     vel = new PVector(vx,vy);
-    sun = img;
     stopPoint = int(random(150,500));
   }
   
