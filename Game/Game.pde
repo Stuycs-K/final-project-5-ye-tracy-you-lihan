@@ -1,25 +1,42 @@
 import java.util.*;
 
-double tick;
-int suns;
-Entity[][] plants;
-ArrayList<Entity> zombies;
-ArrayList<Sun> randSuns;
-
-Entity[] menu;
-Sun x;
+static double tick;
+static int suns;
+static Entity[][] plants;
+static ArrayList<Entity> zombies;
+static ArrayList<Sun> allSuns;
+static Entity[] menu;
 
 // -------------------------------------------------------------------------
-PImage sun, pea, peaShooter, sunflower, zombie;
+static PImage sun;
+static PImage sunflower;
 // -------------------------------------------------------------------------
 
 void draw() 
 {
   drawBackground();
+  drawMenu();
   tick++;
+  
+  Sunflower x = new Sunflower(4, 2);
+  x.display();
+  x.skill();
+  
   randomSunDrop();
-  x.move(x.pos, x.vel, "D");
-  println(x.pos);
+  for (int i = 0; i < allSuns.size(); i++) {
+    Sun s = allSuns.get(i);
+    s.display();
+    if (s.stopPoint >= s.pos.y) {
+      s.pos = move(s.pos, s.vel, "D");
+    }
+    if (mousePressed) {
+      if (mouseX > s.pos.x && mouseX < s.pos.x+75 && mouseY > s.pos.y && mouseY < s.pos.y+75) {
+        allSuns.remove(s);
+        i--;
+        suns += 50;
+      }
+    }
+  }
 }
 
 
@@ -29,8 +46,16 @@ void setup()
   size (1200,750);
   drawBackground();
   
+  allSuns = new ArrayList<Sun>();
+  suns = 0;
+  plants = new Entity[9][5];
+  menu = new Entity[1];
+  menu[0] = new Sunflower();
+  
   sun = loadImage("sun.gif");
-  x = new Sun(500,100,0,10);
+  sun.resize(75,75);
+  sunflower = loadImage("sunflower.png");
+  sunflower.resize(90, 90);
 }
 
 
@@ -73,51 +98,46 @@ void drawBackground()
    rect(0,600,1200,150);
 }
 
-<<<<<<< HEAD
-=======
-// --------------------------------------------------------------------------------------------------------------
-Display methods
-// --------------------------------------------------------------------------------------------------------------
-void displayPeashooter(int x, int y) {
-  peaShooter = loadImage("peaShooter.jpg");
-  peaShooter.resize(80, 80);
-  image(pea,x,y);
-}
-
-void displayPea(int x, int y) {
-  pea = loadImage("pea.jpg");
-  pea.resize(40, 40);
-  image(pea,x,y);
-}
-
-void displayZombie(int x, int y) {
-  zombie = loadImage("zombie.jpg");
-  zombie.resize(90, 90);
-  image(zombie, x, y);
-}
-// --------------------------------------------------------------------------------------------------------------
-
->>>>>>> 41356b90b9f464117579897dd4d81f8524787225
 void randomSunDrop() 
 {
-  //x = new Sun(500,100,0,10, sun);
-  image(sun,x.pos.x, x.pos.y);
-  x.move(x.pos, x.vel, "D");
+  if (getTick()%10 == 0) {
+    allSuns.add(new Sun((int)random(250,1000),0,0,5));
+  }
 }
-<<<<<<< HEAD
-=======
 
-// --------------------------------------------------------------------------------------------------------------
-
-void display(PVector position, int size, PImage img) 
+void drawMenu()
 {
-  img.resize(size,size);
-  image(img, position.x, position.y);
+  fill(#e6dcc3);
+  rect(25,625,200,100);
+  fill(0, 100);
+  textSize(22);
+  for (Entity x : menu) {
+    text(x.getName(), 125, 655);
+    image(sunflower, 30, 630);
+    if (suns < x.getCost()) {
+      fill(#ff0000, 150);
+    }
+    textSize(50);
+    text(x.getCost(), 145, 705);
+  }
 }
 
-// --------------------------------------------------------------------------------------------------------------
-
-void firePea() {
-  PImage 
+public static PVector move(PVector position, PVector velocity, String dir) 
+{
+  if (dir.equals("L")) {
+    return position.add(PVector.mult(velocity,-1));
+  }
+  else if (dir.equals("R")) {
+    return position.add(velocity);
+  }
+  else if (dir.equals("D")) {
+    return position.add(velocity);
+  }
+  else if (dir.equals("U")) {
+    return position.add(PVector.mult(velocity,-1));
+  }
+  else {
+    println("invalid direction");
+    return position;
+  }
 }
->>>>>>> 41356b90b9f464117579897dd4d81f8524787225

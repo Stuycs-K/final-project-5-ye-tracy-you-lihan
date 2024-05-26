@@ -1,26 +1,30 @@
-abstract class Entity {
-  private int HP, currHP, ATK, cost;
+public abstract class Entity {
+  private int row, col;
   private String name;
-  private int x, y;
+  private int cost;
   
-  Entity(String type, int maxHP, int atk, int cst, int X, int Y) {
-    this.name = type;
-    this.HP = maxHP;
-    this.ATK = atk;
-    this.cost = cst;
-    this.currHP = maxHP;
-    this.x = X;
-    this.y = Y;
+  public Entity(int r, int c, String n, int cost) {
+    this.row = r;
+    this.col = c;
+    this.name = n;
+    this.cost = cost;
   }
   
-  int getHP(){ return currHP; }
-  int getATK(){ return ATK; }
-  int getCost(){ return cost; }
-  String getName(){ return name; }
+  public int getRow() {
+    return row;
+  }
+  public int getCol() {
+    return col;
+  }
+  public String getName() {
+    return name;
+  }
+  public int getCost() {
+    return cost;
+  }
   
+  public abstract void display();
+  public abstract void skill();
+  //public abstract void hpBar();
   
-  void setHP(int health){ this.HP = health; }
-  void setName(String type){ this.name = type; }
- 
-  void applyATK(int damage) { this.currHP -= damage; }
 }
