@@ -33,6 +33,4 @@ public class Sunflower extends Entity{
     }
   }
   
-  //public void hpBar() {}
-  
 }

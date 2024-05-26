@@ -4,7 +4,6 @@ static double tick;
 static int suns;
 static Entity[][] plants;
 static ArrayList<Entity> zombies;
-static ArrayList<Entity> lawnmowers;
 static ArrayList<Sun> allSuns;
 static Entity[] menu;
 boolean select;
@@ -13,8 +12,6 @@ PImage selection;
 // -------------------------------------------------------------------------
 static PImage sun;
 static PImage sunflower;
-static PImage peashooter;
-static PImage lawnmower;
 // -------------------------------------------------------------------------
 
 void draw() 
@@ -47,6 +44,10 @@ void draw()
       }
     }
   }
+  
+  if (select == true) {
+    followMouse(selection);
+  }
 }
 
 
@@ -54,7 +55,7 @@ void setup()
 {
   frameRate(60);
   size (1200,750);
-  lawnmowers = new ArrayList<Entity>();
+  drawBackground();
   
   allSuns = new ArrayList<Sun>();
   suns = 0;
@@ -68,8 +69,6 @@ void setup()
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
   sunflower.resize(90, 90);
-  
-  drawBackground();
 }
 
 
@@ -78,6 +77,8 @@ double getTick()       //  **** When calling a skill every x seconds, call with
 {                      //  getTick()%x == 0 & keep in mind that it's a double ****
   return tick/60;
 }
+
+
 
 void drawBackground() 
 {

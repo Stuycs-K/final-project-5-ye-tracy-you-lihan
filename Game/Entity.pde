@@ -25,6 +25,5 @@ public abstract class Entity {
   
   public abstract void display();
   public abstract void skill();
-  //public abstract void hpBar();
   
 }
