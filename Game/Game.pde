@@ -7,6 +7,8 @@ static ArrayList<Entity> zombies;
 static ArrayList<Entity> lawnmowers;
 static ArrayList<Sun> allSuns;
 static Entity[] menu;
+boolean select;
+PImage selection;
 
 // -------------------------------------------------------------------------
 static PImage sun;
@@ -21,9 +23,14 @@ void draw()
   drawMenu();
   tick++;
   
-  Sunflower x = new Sunflower(4, 2);
-  x.display();
-  x.skill();
+  for (int i = 0; i < plants.length; i++) {
+    for (int j = 0; j < plants[0].length; j++) {
+      if (plants[i][j] != null) { 
+        plants[i][j].display();
+        plants[i][j].skill();
+      }
+    }
+  }
   
   randomSunDrop();
   for (int i = 0; i < allSuns.size(); i++) {
@@ -40,13 +47,6 @@ void draw()
       }
     }
   }
-  
-  //for(Entity z : zombies) {
-  //  if(z.getCol() < 200) {
-  //    //y = z.getRow();
-  //    //Lawnmower.skill();
-  //  }
-  //}
 }
 
 
@@ -61,15 +61,13 @@ void setup()
   plants = new Entity[9][5];
   menu = new Entity[1];
   menu[0] = new Sunflower();
+  select = false;
+  selection = sun;
   
   sun = loadImage("sun.gif");
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
   sunflower.resize(90, 90);
-  peashooter = loadImage("peaShooter.jpg");
-  peashooter.resize(90,90);
-  lawnmower = loadImage("Lawnmower.jpg");
-  lawnmower.resize(90, 90);
   
   drawBackground();
 }
@@ -106,15 +104,19 @@ void drawBackground()
   road.resize(100,610);
   image(road,1100,0);
   
-  for(int y = 100; y < 600; y += 100) {
-    //Entity temp = new Lawnmower(120, y);
-    lawnmowers.add(new Lawnmower(120, y));
-    image(lawnmower, 120, y);
-  }
       // menu
    stroke(#d1b38a);
    fill(#d1b38a);
    rect(0,600,1200,150);
+   
+      // currency
+   fill(#d1b38a);
+   rect(980,10,200,50);
+   fill(#e6dcc3);
+   rect(985,15,190,40);
+   textSize(35);
+   fill(0, 80);
+   text("SUNS : " + suns, 995, 48);
 }
 
 void randomSunDrop() 
@@ -140,6 +142,46 @@ void drawMenu()
     text(x.getCost(), 145, 705);
   }
 }
+
+void mouseClicked() {
+  if (mouseX > 25 && mouseX < 225 && mouseY > 625 && mouseY < 725) {
+    if (suns >= menu[0].getCost()) {
+      select = true;
+      selection = sunflower;
+    }
+    else {
+      fill(#ff0000, 150);
+      rect(25, 625, 200, 100);
+    }
+  }
+}
+
+void followMouse(PImage img) {
+  if (mousePressed) {
+    image(img, mouseX-50, mouseY-50);
+  }
+}
+
+void mouseReleased() {
+  if (select == true) {
+    if (mouseX > 200 && mouseX < 1100 && mouseY > 100 && mouseY < 600) {
+      int r = (mouseX-200)/100;
+      int c = (mouseY-100)/100;
+      if (plants[r][c] == null) {
+        if (selection == sunflower) {
+          plants[r][c] = new Sunflower(r,c);
+          suns -= 50;
+        }
+      }
+    }
+    select = false;
+  }
+}
+
+  //PImage yard = loadImage("yard.jpg");
+  //yard.resize(900,500);
+  //image(yard,200,100);
+
 
 public static PVector move(PVector position, PVector velocity, String dir) 
 {
