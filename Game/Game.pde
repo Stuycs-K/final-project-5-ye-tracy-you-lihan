@@ -4,12 +4,15 @@ static double tick;
 static int suns;
 static Entity[][] plants;
 static ArrayList<Entity> zombies;
+static ArrayList<Entity> lawnmowers;
 static ArrayList<Sun> allSuns;
 static Entity[] menu;
 
 // -------------------------------------------------------------------------
 static PImage sun;
 static PImage sunflower;
+static PImage peashooter;
+static PImage lawnmower;
 // -------------------------------------------------------------------------
 
 void draw() 
@@ -37,6 +40,13 @@ void draw()
       }
     }
   }
+  
+  //for(Entity z : zombies) {
+  //  if(z.getCol() < 200) {
+  //    //y = z.getRow();
+  //    //Lawnmower.skill();
+  //  }
+  //}
 }
 
 
@@ -44,7 +54,7 @@ void setup()
 {
   frameRate(60);
   size (1200,750);
-  drawBackground();
+  lawnmowers = new ArrayList<Entity>();
   
   allSuns = new ArrayList<Sun>();
   suns = 0;
@@ -56,6 +66,12 @@ void setup()
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
   sunflower.resize(90, 90);
+  peashooter = loadImage("peaShooter.jpg");
+  peashooter.resize(90,90);
+  lawnmower = loadImage("Lawnmower.jpg");
+  lawnmower.resize(90, 90);
+  
+  drawBackground();
 }
 
 
@@ -64,8 +80,6 @@ double getTick()       //  **** When calling a skill every x seconds, call with
 {                      //  getTick()%x == 0 & keep in mind that it's a double ****
   return tick/60;
 }
-
-
 
 void drawBackground() 
 {
@@ -92,6 +106,11 @@ void drawBackground()
   road.resize(100,610);
   image(road,1100,0);
   
+  for(int y = 100; y < 600; y += 100) {
+    //Entity temp = new Lawnmower(120, y);
+    lawnmowers.add(new Lawnmower(120, y));
+    image(lawnmower, 120, y);
+  }
       // menu
    stroke(#d1b38a);
    fill(#d1b38a);
