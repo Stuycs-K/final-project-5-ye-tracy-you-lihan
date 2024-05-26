@@ -19,11 +19,12 @@ void draw()
 {
   drawBackground();
   drawMenu();
+  drawLawnmower();
   tick++;
   
-  Sunflower x = new Sunflower(4, 2);
-  x.display();
-  x.skill();
+  //Sunflower x = new Sunflower(4, 2);
+  //x.display();
+  //x.skill();
   
   randomSunDrop();
   for (int i = 0; i < allSuns.size(); i++) {
@@ -54,6 +55,7 @@ void setup()
 {
   frameRate(60);
   size (1200,750);
+  drawBackground();
   lawnmowers = new ArrayList<Entity>();
   
   allSuns = new ArrayList<Sun>();
@@ -68,10 +70,9 @@ void setup()
   sunflower.resize(90, 90);
   peashooter = loadImage("peaShooter.jpg");
   peashooter.resize(90,90);
-  lawnmower = loadImage("Lawnmower.jpg");
+  lawnmower = loadImage("Lawnmower.png");
   lawnmower.resize(90, 90);
   
-  drawBackground();
 }
 
 
@@ -105,18 +106,20 @@ void drawBackground()
   PImage road = loadImage("road.jpg");
   road.resize(100,610);
   image(road,1100,0);
-  
-  for(int y = 100; y < 600; y += 100) {
-    //Entity temp = new Lawnmower(120, y);
-    lawnmowers.add(new Lawnmower(120, y));
-    image(lawnmower, 120, y);
-  }
+ 
       // menu
    stroke(#d1b38a);
    fill(#d1b38a);
    rect(0,600,1200,150);
 }
 
+void drawLawnmower(){
+    //lawnmower.resize(90, 90);
+    for(int y = 100; y < 600; y += 100) {
+      lawnmowers.add(new Lawnmower(120, y));
+      image(lawnmower, 120, y);
+  }
+}
 void randomSunDrop() 
 {
   if (getTick()%10 == 0) {
