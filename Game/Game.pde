@@ -3,21 +3,30 @@ import java.util.*;
 static double tick;
 static int suns;
 static Entity[][] plants;
-static ArrayList<Entity> zombies;
+//static ArrayList<Entity> zombies;
+static ArrayList<Lawnmower> lawnmowers;
 static ArrayList<Sun> allSuns;
+static ArrayList<circle> zombies;
 static Entity[] menu;
+
+static boolean activate;
 boolean select;
 PImage selection;
+
 
 // -------------------------------------------------------------------------
 static PImage sun;
 static PImage sunflower;
+static PImage lawnmower;
 // -------------------------------------------------------------------------
 
 void draw() 
 {
   drawBackground();
   drawMenu();
+  updateLawnmower();
+  spawnZombie();
+  updateZombie();
   tick++;
   
   for (int i = 0; i < plants.length; i++) {
@@ -45,17 +54,51 @@ void draw()
     }
   }
   
+  for(int z = 0; z < zombies.size(); z++) {
+    circle currZomb = zombies.get(z);
+    if(currZomb.pos.x < 220) {
+      for (int l = 0; l < lawnmowers.size(); l++) {
+        Lawnmower currLawn = lawnmowers.get(l);
+        if (currLawn.pos.y == currZomb.pos.y) {
+          currLawn.skill();
+          currLawn.activate = true;
+        }
+      }
+    }
+   }
+
   if (select == true) {
     followMouse(selection);
   }
+
 }
 
+void spawnZombie(){
+  if (getTick()%2 == 0) {
+    zombies.add(new circle(1100, 100));
+  }
+}
+
+void updateZombie() {
+  for (circle z : zombies) {
+    z.moveL();
+  }
+}
 
 void setup() 
 {
   frameRate(60);
   size (1200,750);
   drawBackground();
+
+  activate = false;
+  lawnmowers = new ArrayList<Lawnmower>();
+  for(int y = 100; y < 600; y += 100) {
+    lawnmowers.add(new Lawnmower(120, y));
+  }
+    
+  zombies = new ArrayList<circle>();
+  zombies.add(new circle(1100, 100));
   
   allSuns = new ArrayList<Sun>();
   suns = 0;
@@ -69,6 +112,10 @@ void setup()
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
   sunflower.resize(90, 90);
+  //peashooter = loadImage("peaShooter.jpg");
+  //peashooter.resize(90,90);
+  lawnmower = loadImage("Lawnmower.png");
+  lawnmower.resize(100, 100);
 }
 
 
@@ -77,7 +124,6 @@ double getTick()       //  **** When calling a skill every x seconds, call with
 {                      //  getTick()%x == 0 & keep in mind that it's a double ****
   return tick/60;
 }
-
 
 
 void drawBackground() 
@@ -104,7 +150,7 @@ void drawBackground()
   PImage road = loadImage("road.jpg");
   road.resize(100,610);
   image(road,1100,0);
-  
+
       // menu
    stroke(#d1b38a);
    fill(#d1b38a);
@@ -118,6 +164,16 @@ void drawBackground()
    textSize(35);
    fill(0, 80);
    text("SUNS : " + suns, 995, 48);
+}
+
+void updateLawnmower(){
+    for(int l = 0; l < lawnmowers.size(); l++) {
+      if(lawnmowers.get(l).pos.x > 1200) {
+        lawnmowers.remove(l);
+      }
+      if (lawnmowers.get(l).activate) lawnmowers.get(l).skill();
+      lawnmowers.get(l).display();
+    }
 }
 
 void randomSunDrop() 
