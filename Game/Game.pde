@@ -3,9 +3,10 @@ import java.util.*;
 static double tick;
 static int suns;
 static Entity[][] plants;
-static ArrayList<Entity> zombies;
-static ArrayList<Entity> lawnmowers;
+//static ArrayList<Entity> zombies;
+static ArrayList<Lawnmower> lawnmowers;
 static ArrayList<Sun> allSuns;
+static ArrayList<circle> zombies;
 static Entity[] menu;
 
 // -------------------------------------------------------------------------
@@ -19,12 +20,10 @@ void draw()
 {
   drawBackground();
   drawMenu();
-  drawLawnmower();
+  updateLawnmower();
+  updateZombie();
+  spawnZombie();
   tick++;
-  
-  //Sunflower x = new Sunflower(4, 2);
-  //x.display();
-  //x.skill();
   
   randomSunDrop();
   for (int i = 0; i < allSuns.size(); i++) {
@@ -41,22 +40,50 @@ void draw()
       }
     }
   }
-  
-  //for(Entity z : zombies) {
-  //  if(z.getCol() < 200) {
-  //    //y = z.getRow();
-  //    //Lawnmower.skill();
-  //  }
-  //}
+
+  for(int z = 0; z < zombies.size(); z++) {
+    circle currZomb = zombies.get(z);
+    if(currZomb.pos.x < 220) {
+      for (int l = 0; l < lawnmowers.size(); l++) {
+        Lawnmower currLawn = lawnmowers.get(l);
+        if (currLawn.pos.y == currZomb.pos.y) {
+          z -= currLawn.skill();
+        }
+      }
+      //for(int l = 0; l < lawnmowers.size(); l++) {
+      //  if (lawnmowers.get(l).pos.y == zombies.get(z).pos.y) {
+      //    z -= lawnmowers.get(l).skill();
+      //  }
+      //}
+    }
+   }
+   
 }
 
+void spawnZombie(){
+  if (getTick()%2 == 0) {
+    zombies.add(new circle(1100, 100));
+  }
+}
+
+void updateZombie() {
+  for (circle z : zombies) {
+    z.moveL();
+  }
+}
 
 void setup() 
 {
   frameRate(60);
   size (1200,750);
   drawBackground();
-  lawnmowers = new ArrayList<Entity>();
+  lawnmowers = new ArrayList<Lawnmower>();
+  for(int y = 100; y < 600; y += 100) {
+    lawnmowers.add(new Lawnmower(120, y));
+  }
+    
+  zombies = new ArrayList<circle>();
+  zombies.add(new circle(1100, 100));
   
   allSuns = new ArrayList<Sun>();
   suns = 0;
@@ -71,8 +98,7 @@ void setup()
   peashooter = loadImage("peaShooter.jpg");
   peashooter.resize(90,90);
   lawnmower = loadImage("Lawnmower.png");
-  lawnmower.resize(90, 90);
-  
+  lawnmower.resize(100, 100);
 }
 
 
@@ -113,13 +139,15 @@ void drawBackground()
    rect(0,600,1200,150);
 }
 
-void drawLawnmower(){
-    //lawnmower.resize(90, 90);
-    for(int y = 100; y < 600; y += 100) {
-      lawnmowers.add(new Lawnmower(120, y));
-      image(lawnmower, 120, y);
-  }
+void updateLawnmower(){
+    for(int l = 0; l < lawnmowers.size(); l++) {
+      if(lawnmowers.get(l).pos.x > 1200) {
+        lawnmowers.remove(l);
+      }
+      lawnmowers.get(l).display();
+    }
 }
+
 void randomSunDrop() 
 {
   if (getTick()%10 == 0) {
