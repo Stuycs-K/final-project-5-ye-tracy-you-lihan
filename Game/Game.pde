@@ -21,8 +21,8 @@ void draw()
   drawBackground();
   drawMenu();
   updateLawnmower();
-  updateZombie();
   spawnZombie();
+  updateZombie();
   tick++;
   
   randomSunDrop();
@@ -43,18 +43,14 @@ void draw()
 
   for(int z = 0; z < zombies.size(); z++) {
     circle currZomb = zombies.get(z);
+    //currZomb.moveL();
     if(currZomb.pos.x < 220) {
       for (int l = 0; l < lawnmowers.size(); l++) {
         Lawnmower currLawn = lawnmowers.get(l);
         if (currLawn.pos.y == currZomb.pos.y) {
-          z -= currLawn.skill();
+          currLawn.skill();
         }
       }
-      //for(int l = 0; l < lawnmowers.size(); l++) {
-      //  if (lawnmowers.get(l).pos.y == zombies.get(z).pos.y) {
-      //    z -= lawnmowers.get(l).skill();
-      //  }
-      //}
     }
    }
    
