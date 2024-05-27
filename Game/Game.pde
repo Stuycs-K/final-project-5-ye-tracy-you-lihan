@@ -8,6 +8,7 @@ static ArrayList<Lawnmower> lawnmowers;
 static ArrayList<Sun> allSuns;
 static ArrayList<circle> zombies;
 static Entity[] menu;
+static boolean activate;
 
 // -------------------------------------------------------------------------
 static PImage sun;
@@ -40,15 +41,15 @@ void draw()
       }
     }
   }
-
+  
   for(int z = 0; z < zombies.size(); z++) {
     circle currZomb = zombies.get(z);
-    //currZomb.moveL();
     if(currZomb.pos.x < 220) {
       for (int l = 0; l < lawnmowers.size(); l++) {
         Lawnmower currLawn = lawnmowers.get(l);
         if (currLawn.pos.y == currZomb.pos.y) {
           currLawn.skill();
+          currLawn.activate = true;
         }
       }
     }
@@ -73,6 +74,7 @@ void setup()
   frameRate(60);
   size (1200,750);
   drawBackground();
+  activate = false;
   lawnmowers = new ArrayList<Lawnmower>();
   for(int y = 100; y < 600; y += 100) {
     lawnmowers.add(new Lawnmower(120, y));
@@ -140,6 +142,7 @@ void updateLawnmower(){
       if(lawnmowers.get(l).pos.x > 1200) {
         lawnmowers.remove(l);
       }
+      if (lawnmowers.get(l).activate) lawnmowers.get(l).skill();
       lawnmowers.get(l).display();
     }
 }
