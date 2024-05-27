@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Sunflower extends Entity{
-  int maxHP, currHP, ATK, cost, coolDown;
+  int maxHP, currHP, ATK, coolDown, t;
   PImage img;
   
   public Sunflower() {
@@ -13,9 +13,9 @@ public class Sunflower extends Entity{
     maxHP = 300;
     currHP = 300;
     ATK = 0;
-    cost = 50;
     coolDown = 5;
     img = sunflower;
+    t = (int)getTick()%5;
   }
   
   public void display() {
@@ -23,7 +23,7 @@ public class Sunflower extends Entity{
   }
   
   public void skill() {
-    if (getTick()%5 == 0) {
+    if ((getTick()+t)%5 == 0) {
       if ((int)(Math.random()*2) == 0) {
         allSuns.add(new Sun((getRow()+2)*100+60, (getCol()+1)*100+20, 0, 0));
       }
@@ -32,7 +32,5 @@ public class Sunflower extends Entity{
       }
     }
   }
-  
-  //public void hpBar() {}
   
 }
