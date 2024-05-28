@@ -15,7 +15,7 @@ class Lawnmower{
   public void skill() {
       pos = Game.move(pos, vel, "R");
       for (int z = 0; z < Game.zombies.size(); z++) {
-        if (Game.zombies.get(z).pos.x <= pos.x && Game.zombies.get(z).pos.y >= pos.y) {
+        if (zombies.get(z).pos.x <= pos.x && zombies.get(z).pos.y >= pos.y) {
           Game.zombies.remove(z);
           z--;
         }
