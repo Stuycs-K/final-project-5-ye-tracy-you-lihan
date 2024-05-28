@@ -112,8 +112,6 @@ void setup()
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
   sunflower.resize(90, 90);
-  //peashooter = loadImage("peaShooter.jpg");
-  //peashooter.resize(90,90);
   lawnmower = loadImage("Lawnmower.png");
   lawnmower.resize(100, 100);
 }
@@ -234,7 +232,6 @@ void mouseReleased() {
     select = false;
   }
 }
-
 
 public static PVector move(PVector position, PVector velocity, String dir) 
 {

@@ -3,7 +3,6 @@ class Lawnmower{
   PVector pos, vel;
   boolean activate;
   Lawnmower(int r, int c){
-    //super(r, c, "Lawnmower", 0);
     pos = new PVector(r, c);
     vel = new PVector(10, 0);
     activate = false;
