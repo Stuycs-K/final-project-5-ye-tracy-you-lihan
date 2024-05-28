@@ -3,8 +3,8 @@ class circle {
   int currHP;
   circle(int x, int y) {
     pos = new PVector(x, y);
-    vel = new PVector(6, 0);
-    currHP = 300;
+    vel = new PVector(2, 0);
+    currHP = 1;
   }
   
   void display() {

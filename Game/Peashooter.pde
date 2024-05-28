@@ -13,12 +13,12 @@ class Peashooter extends Entity{
   }
   
   void display() {
-    image(peashooter, getCol(), getRow());//(getRow()+2)*100, (getCol()+1)*100);
+    image(peashooter, getRow(), getCol());//(getRow()+2)*100, (getCol()+1)*100);
   }
   
   void skill() {
-    if ((getTick()+t)%2 == 0) {
-      Game.peas.add(new Pea(getCol(), getRow()));
+    if ((getTick()+t)%1.5 == 0) {
+      Game.peas.add(new Pea(getRow(), getCol()));
     }
   }
 }

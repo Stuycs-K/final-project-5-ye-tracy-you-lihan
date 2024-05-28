@@ -7,13 +7,13 @@ public class Pea {
   
   public Pea(int x, int y) {
     pos = new PVector(x,y);
-    vel = new PVector(5,0);
+    vel = new PVector(3,0);
     stopPoint = 1200;
     ATK = 20;
   }
   
   void display() {
-    image(sun, pos.x, pos.y);
+    image(pea, pos.x, pos.y);
   }
 
 }

@@ -20,6 +20,7 @@ static PImage sun;
 static PImage sunflower;
 static PImage lawnmower;
 static PImage peashooter;
+static PImage pea;
 // -------------------------------------------------------------------------
 
 void draw() 
@@ -102,14 +103,16 @@ void setup()
   select = false;
   selection = sun;
   
-  plants[0][0] = new Peashooter(100, 100);
+  plants[0][0] = new Peashooter(200, 100);
   
   sun = loadImage("sun.gif");
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
   sunflower.resize(90, 90);
-  peashooter = loadImage("peaShooter.jpg");
-  peashooter.resize(90,90);
+  peashooter = loadImage("peaShooter.png");
+  peashooter.resize(118,90);
+  pea = loadImage("pea.png");
+  pea.resize(60, 60);
   lawnmower = loadImage("Lawnmower.png");
   lawnmower.resize(100, 100);
 }
@@ -180,8 +183,10 @@ void updatePeas() {
       circle currZomb = zombies.get(z);
         if (currZomb.pos.x <= currPea.pos.x && currZomb.pos.y >= currPea.pos.y) {
           currZomb.currHP = currZomb.currHP - 20;
+          peas.remove(p);
         }
       }
+     currPea.display();
   }
 }
 
@@ -193,7 +198,7 @@ void randomSunDrop()
 }
 
 void spawnZombie(){
-  if (getTick()%2 == 0) {
+  if (getTick()%3 == 0) {
     zombies.add(new circle(1100, 100));
   }
 }
@@ -201,7 +206,7 @@ void spawnZombie(){
 void updateZombie() {
   for (int z = 0; z < zombies.size(); z++) {
      circle currZomb = zombies.get(z);
-     if (currZomb.currHP == 0) {
+     if (currZomb.currHP <= 0) {
        zombies.remove(z);
      } else {
        currZomb.moveL();
