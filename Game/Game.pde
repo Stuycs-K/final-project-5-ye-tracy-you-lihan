@@ -7,6 +7,7 @@ static Entity[][] plants;
 static ArrayList<Lawnmower> lawnmowers;
 static ArrayList<Sun> allSuns;
 static ArrayList<circle> zombies;
+static ArrayList<Pea> peas;
 static Entity[] menu;
 
 static boolean activate;
@@ -18,6 +19,7 @@ PImage selection;
 static PImage sun;
 static PImage sunflower;
 static PImage lawnmower;
+static PImage peashooter;
 // -------------------------------------------------------------------------
 
 void draw() 
@@ -25,6 +27,7 @@ void draw()
   drawBackground();
   drawMenu();
   updateLawnmower();
+  updatePeas();
   spawnZombie();
   updateZombie();
   tick++;
@@ -73,24 +76,14 @@ void draw()
 
 }
 
-void spawnZombie(){
-  if (getTick()%2 == 0) {
-    zombies.add(new circle(1100, 100));
-  }
-}
-
-void updateZombie() {
-  for (circle z : zombies) {
-    z.moveL();
-  }
-}
-
 void setup() 
 {
   frameRate(60);
   size (1200,750);
   drawBackground();
 
+  peas = new ArrayList<Pea>();
+  
   activate = false;
   lawnmowers = new ArrayList<Lawnmower>();
   for(int y = 100; y < 600; y += 100) {
@@ -105,15 +98,18 @@ void setup()
   plants = new Entity[9][5];
   menu = new Entity[1];
   menu[0] = new Sunflower();
+  //menu[1] = new 
   select = false;
   selection = sun;
+  
+  plants[0][0] = new Peashooter(100, 100);
   
   sun = loadImage("sun.gif");
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
   sunflower.resize(90, 90);
-  //peashooter = loadImage("peaShooter.jpg");
-  //peashooter.resize(90,90);
+  peashooter = loadImage("peaShooter.jpg");
+  peashooter.resize(90,90);
   lawnmower = loadImage("Lawnmower.png");
   lawnmower.resize(100, 100);
 }
@@ -176,10 +172,40 @@ void updateLawnmower(){
     }
 }
 
+void updatePeas() {
+  for (int p = 0; p < peas.size(); p++) {
+    Pea currPea = peas.get(p);
+    currPea.pos = move(currPea.pos, currPea.vel, "R");
+    for (int z = 0; z < zombies.size(); z++) {
+      circle currZomb = zombies.get(z);
+        if (currZomb.pos.x <= currPea.pos.x && currZomb.pos.y >= currPea.pos.y) {
+          currZomb.currHP = currZomb.currHP - 20;
+        }
+      }
+  }
+}
+
 void randomSunDrop() 
 {
   if (getTick()%10 == 0) {
     allSuns.add(new Sun((int)random(250,1000),0,0,5));
+  }
+}
+
+void spawnZombie(){
+  if (getTick()%2 == 0) {
+    zombies.add(new circle(1100, 100));
+  }
+}
+
+void updateZombie() {
+  for (int z = 0; z < zombies.size(); z++) {
+     circle currZomb = zombies.get(z);
+     if (currZomb.currHP == 0) {
+       zombies.remove(z);
+     } else {
+       currZomb.moveL();
+     }
   }
 }
 
@@ -234,11 +260,6 @@ void mouseReleased() {
     select = false;
   }
 }
-
-  //PImage yard = loadImage("yard.jpg");
-  //yard.resize(900,500);
-  //image(yard,200,100);
-
 
 public static PVector move(PVector position, PVector velocity, String dir) 
 {

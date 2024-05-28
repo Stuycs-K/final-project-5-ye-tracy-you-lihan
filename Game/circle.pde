@@ -1,9 +1,10 @@
 class circle {
   PVector pos, vel;
-  
+  int currHP;
   circle(int x, int y) {
     pos = new PVector(x, y);
     vel = new PVector(6, 0);
+    currHP = 300;
   }
   
   void display() {
