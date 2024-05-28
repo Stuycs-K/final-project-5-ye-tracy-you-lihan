@@ -6,7 +6,7 @@ static Entity[][] plants;
 //static ArrayList<Entity> zombies;
 static ArrayList<Lawnmower> lawnmowers;
 static ArrayList<Sun> allSuns;
-static ArrayList<circle> zombies;
+//static ArrayList<circle> zombies;
 static Entity[] menu;
 
 static boolean activate;
@@ -25,8 +25,8 @@ void draw()
   drawBackground();
   drawMenu();
   updateLawnmower();
-  spawnZombie();
-  updateZombie();
+  //spawnZombie();
+  //updateZombie();
   tick++;
   
   for (int i = 0; i < plants.length; i++) {
@@ -73,17 +73,17 @@ void draw()
 
 }
 
-void spawnZombie(){
-  if (getTick()%2 == 0) {
-    zombies.add(new circle(1100, 100));
-  }
-}
+//void spawnZombie(){
+//  if (getTick()%2 == 0) {
+//    zombies.add(new circle(1100, 100));
+//  }
+//}
 
-void updateZombie() {
-  for (circle z : zombies) {
-    z.moveL();
-  }
-}
+//void updateZombie() {
+//  for (circle z : zombies) {
+//    z.moveL();
+//  }
+//}
 
 void setup() 
 {
@@ -97,8 +97,8 @@ void setup()
     lawnmowers.add(new Lawnmower(120, y));
   }
     
-  zombies = new ArrayList<circle>();
-  zombies.add(new circle(1100, 100));
+  //zombies = new ArrayList<circle>();
+  //zombies.add(new circle(1100, 400));
   
   allSuns = new ArrayList<Sun>();
   suns = 0;
@@ -234,10 +234,6 @@ void mouseReleased() {
     select = false;
   }
 }
-
-  //PImage yard = loadImage("yard.jpg");
-  //yard.resize(900,500);
-  //image(yard,200,100);
 
 
 public static PVector move(PVector position, PVector velocity, String dir) 
