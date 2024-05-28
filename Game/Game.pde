@@ -3,10 +3,9 @@ import java.util.*;
 static double tick;
 static int suns;
 static Entity[][] plants;
-//static ArrayList<Entity> zombies;
+static ArrayList<Entity> zombies;
 static ArrayList<Lawnmower> lawnmowers;
 static ArrayList<Sun> allSuns;
-//static ArrayList<circle> zombies;
 static Entity[] menu;
 
 static boolean activate;
@@ -18,6 +17,7 @@ PImage selection;
 static PImage sun;
 static PImage sunflower;
 static PImage lawnmower;
+static PImage zombie;
 // -------------------------------------------------------------------------
 
 void draw() 
@@ -38,6 +38,9 @@ void draw()
     }
   }
   
+  //Zombie x = new Zombie(500,500);
+  //x.display();
+  
   randomSunDrop();
   for (int i = 0; i < allSuns.size(); i++) {
     Sun s = allSuns.get(i);
@@ -54,23 +57,22 @@ void draw()
     }
   }
   
-  for(int z = 0; z < zombies.size(); z++) {
-    circle currZomb = zombies.get(z);
-    if(currZomb.pos.x < 220) {
-      for (int l = 0; l < lawnmowers.size(); l++) {
-        Lawnmower currLawn = lawnmowers.get(l);
-        if (currLawn.pos.y == currZomb.pos.y) {
-          currLawn.skill();
-          currLawn.activate = true;
-        }
-      }
-    }
-   }
+  //for(int z = 0; z < zombies.size(); z++) {
+  //  circle currZomb = zombies.get(z);
+  //  if(currZomb.pos.x < 220) {
+  //    for (int l = 0; l < lawnmowers.size(); l++) {
+  //      Lawnmower currLawn = lawnmowers.get(l);
+  //      if (currLawn.pos.y == currZomb.pos.y) {
+  //        currLawn.skill();
+  //        currLawn.activate = true;
+  //      }
+  //    }
+  //  }
+  // }
 
   if (select == true) {
     followMouse(selection);
   }
-
 }
 
 //void spawnZombie(){
@@ -96,9 +98,6 @@ void setup()
   for(int y = 100; y < 600; y += 100) {
     lawnmowers.add(new Lawnmower(120, y));
   }
-    
-  //zombies = new ArrayList<circle>();
-  //zombies.add(new circle(1100, 400));
   
   allSuns = new ArrayList<Sun>();
   suns = 0;
