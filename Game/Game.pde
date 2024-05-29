@@ -94,7 +94,7 @@ void setup()
   zombies = new ArrayList<circle>();
   
   allSuns = new ArrayList<Sun>();
-  suns = 0;
+  suns = 1000;
   plants = new Entity[9][5];
   menu = new Entity[2];
   menu[0] = new Sunflower();
