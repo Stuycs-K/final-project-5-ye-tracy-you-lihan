@@ -1,5 +1,5 @@
 public abstract class Entity {
-  private int row, col, maxHP, currHP;
+  private int row, col, currHP;
   private String name;
   private int cost;
   
@@ -8,7 +8,6 @@ public abstract class Entity {
     this.col = c;
     this.name = n;
     this.cost = cost;
-    this.maxHP = hp;
     this.currHP = hp;
   }
   

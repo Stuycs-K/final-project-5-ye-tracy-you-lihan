@@ -245,11 +245,6 @@ public static PVector move(PVector position, PVector velocity, String dir)
   }
 }
 
-//  lawnmowers = new ArrayList<Lawnmower>();
-//  for(int y = 100; y < 600; y += 100) {
-//    lawnmowers.add(new Lawnmower(120, y));
-//  }
-
 void randomZombieSpawn() {
   int x = (int)random(10);
   if (x == 5) {
