@@ -51,7 +51,7 @@ void draw()
     }
   }
   
-  if (getTick()%0.5 == 0) {
+  if (getTick()%5 == 0) {
     randomZombieSpawn();
   }
   zombieMove();
@@ -156,11 +156,13 @@ void drawBackground()
 
 void updateLawnmower(){
     for(int l = 0; l < lawnmowers.size(); l++) {
+      if (lawnmowers.get(l).activate) {
+        lawnmowers.get(l).skill();
+      }
+      lawnmowers.get(l).display();
       if(lawnmowers.get(l).pos.x > 1200) {
         lawnmowers.remove(l);
       }
-      if (lawnmowers.get(l).activate) lawnmowers.get(l).skill();
-      lawnmowers.get(l).display();
     }
 }
 
@@ -271,7 +273,16 @@ void randomZombieSpawn() {
 void zombieMove() {
   for (Zombie z : zombies) {
     z.display();
-    if (getTick()%0.5 == 0) {
+    
+    int r = (int)((z.pos.x-200)/100);
+    int c = (int)((z.pos.y-100)/100);
+    if (r > -1 && r < 9 && c > -1 && c < 5 && plants[r][c] != null) {
+      z.attack(plants[r][c]);
+      if (plants[r][c].getHP() == 0) {
+        plants[r][c] = null;
+      }
+    }
+    else if (getTick()%0.5 == 0) {
       z.pos = move(z.pos, z.vel, "L");
     }
   }

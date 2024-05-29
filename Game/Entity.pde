@@ -1,13 +1,15 @@
 public abstract class Entity {
-  private int row, col;
+  private int row, col, maxHP, currHP;
   private String name;
   private int cost;
   
-  public Entity(int r, int c, String n, int cost) {
+  public Entity(int r, int c, String n, int cost, int hp) {
     this.row = r;
     this.col = c;
     this.name = n;
     this.cost = cost;
+    this.maxHP = hp;
+    this.currHP = hp;
   }
   
   public int getRow() {
@@ -21,6 +23,12 @@ public abstract class Entity {
   }
   public int getCost() {
     return cost;
+  }
+  public int getHP() {
+    return currHP;
+  }
+  public void setHP(int atk) {
+    currHP -= atk;
   }
   
   public abstract void display();

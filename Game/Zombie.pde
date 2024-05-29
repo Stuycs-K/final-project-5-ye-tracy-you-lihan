@@ -7,7 +7,7 @@ public class Zombie{
   
   public Zombie(int x, int y) {
     pos = new PVector(x, y);
-    vel = new PVector(100,0);
+    vel = new PVector(10,0);
     hp = 190;
     atk = 100;
     img = zombie;
@@ -17,8 +17,13 @@ public class Zombie{
     image(img, pos.x, pos.y-15);
   }
   
-  public void attack() {
-    //
+  public void attack(Entity x) {
+    if (getTick()%3 == 0) {
+      noStroke();
+      fill(#ff0000, 150);
+      rect(x.getRow()*100+200, x.getCol()*100+100, 100, 130);
+      x.setHP(this.atk);
+    }
   }
   
 }
