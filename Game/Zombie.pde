@@ -18,7 +18,7 @@ public class Zombie{
   }
   
   public void attack(Entity x) {
-    if (getTick()%3 == 0) {
+    if (getTick()%2 == 0) {
       noStroke();
       fill(#ff0000, 150);
       rect(x.getRow()*100+200, x.getCol()*100+100, 100, 130);
