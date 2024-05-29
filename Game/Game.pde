@@ -6,7 +6,7 @@ static Entity[][] plants;
 //static ArrayList<Entity> zombies;
 static ArrayList<Lawnmower> lawnmowers;
 static ArrayList<Sun> allSuns;
-static ArrayList<circle> zombies;
+//static ArrayList<circle> zombies;
 static ArrayList<Pea> peas;
 static Entity[] menu;
 
@@ -29,8 +29,6 @@ void draw()
   drawMenu();
   updateLawnmower();
   updatePeas();
-  //spawnZombie();
-  updateZombie();
   tick++;
   
   for (int i = 0; i < plants.length; i++) {
@@ -195,24 +193,6 @@ void randomSunDrop()
 {
   if (getTick()%10 == 0) {
     allSuns.add(new Sun((int)random(250,1000),0,0,5));
-  }
-}
-
-void spawnZombie(){
-  if (getTick()%1 == 0) {
-    zombies.add(new circle(1100, 100));
-    zombies.add(new circle(1100, 300));
-  }
-}
-
-void updateZombie() {
-  for (int z = 0; z < zombies.size(); z++) {
-     circle currZomb = zombies.get(z);
-     if (currZomb.currHP <= 0) {
-       zombies.remove(z);
-     } else {
-       currZomb.moveL();
-     }
   }
 }
 
