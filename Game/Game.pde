@@ -3,17 +3,14 @@ import java.util.*;
 static double tick;
 static int suns;
 static Entity[][] plants;
-//static ArrayList<Entity> zombies;
+static ArrayList<Zombie> zombies;
 static ArrayList<Lawnmower> lawnmowers;
 static ArrayList<Sun> allSuns;
-//static ArrayList<circle> zombies;
-static ArrayList<Pea> peas;
 static Entity[] menu;
 
 static boolean activate;
 boolean select;
 PImage selection;
-
 
 // -------------------------------------------------------------------------
 static PImage sun;
@@ -21,6 +18,7 @@ static PImage sunflower;
 static PImage lawnmower;
 static PImage peashooter;
 static PImage pea;
+static PImage zombie;
 // -------------------------------------------------------------------------
 
 void draw() 
@@ -56,8 +54,13 @@ void draw()
     }
   }
   
+  if (getTick()%5 == 0) {
+    randomZombieSpawn();
+  }
+  zombieMove();
+  
   for(int z = 0; z < zombies.size(); z++) {
-    circle currZomb = zombies.get(z);
+    Zombie currZomb = zombies.get(z);
     if(currZomb.pos.x < 220) {
       for (int l = 0; l < lawnmowers.size(); l++) {
         Lawnmower currLawn = lawnmowers.get(l);
@@ -77,6 +80,7 @@ void draw()
 
 void setup() 
 {
+  
   frameRate(60);
   size (1200,750);
   drawBackground();
@@ -88,17 +92,17 @@ void setup()
   for(int y = 100; y < 600; y += 100) {
     lawnmowers.add(new Lawnmower(120, y));
   }
-    
-  zombies = new ArrayList<circle>();
   
   allSuns = new ArrayList<Sun>();
-  suns = 1000;
+  suns = 50;
+
   plants = new Entity[9][5];
   menu = new Entity[2];
   menu[0] = new Sunflower();
   menu[1] = new Peashooter();
   select = false;
   selection = sun;
+  zombies = new ArrayList<Zombie>();
   
  
   sun = loadImage("sun.gif");
@@ -111,6 +115,8 @@ void setup()
   pea.resize(60, 60);
   lawnmower = loadImage("Lawnmower.png");
   lawnmower.resize(100, 100);
+  zombie = loadImage("zombie.png");
+  zombie.resize(90,120);
 }
 
 
@@ -164,11 +170,12 @@ void drawBackground()
 void updateLawnmower(){
   //if (lawnmowers.size() > 0) {
     for(int l = 0; l < lawnmowers.size(); l++) {
+      if (lawnmowers.get(l).activate) {
+        lawnmowers.get(l).skill();
+      }
       lawnmowers.get(l).display();
       if(lawnmowers.get(l).pos.x > 1200) {
         lawnmowers.remove(l);
-      } else if (lawnmowers.get(l).activate) {
-        lawnmowers.get(l).skill();
       }
     }
 }
@@ -291,5 +298,43 @@ public static PVector move(PVector position, PVector velocity, String dir)
   else {
     println("invalid direction");
     return position;
+  }
+}
+
+void randomZombieSpawn() {
+  int x = (int)random(10);
+  if (x == 5) {
+    zombies.add(new Zombie(1200,100));
+  }
+  else if (x == 6) {
+    zombies.add(new Zombie(1200,200));
+  }
+  else if (x == 7) {
+    zombies.add(new Zombie(1200,300));
+  }
+  else if (x == 8) {
+    zombies.add(new Zombie(1200,400));
+  }
+  else if (x == 9) {
+    zombies.add(new Zombie(1200,500));
+  }
+  
+}
+
+void zombieMove() {
+  for (Zombie z : zombies) {
+    z.display();
+    
+    int r = (int)((z.pos.x-200)/100);
+    int c = (int)((z.pos.y-100)/100);
+    if (r > -1 && r < 9 && c > -1 && c < 5 && plants[r][c] != null) {
+      z.attack(plants[r][c]);
+      if (plants[r][c].getHP() == 0) {
+        plants[r][c] = null;
+      }
+    }
+    else if (getTick()%0.5 == 0) {
+      z.pos = move(z.pos, z.vel, "L");
+    }
   }
 }

@@ -3,7 +3,6 @@ class Lawnmower{
   PVector pos, vel;
   boolean activate;
   Lawnmower(int r, int c){
-    //super(r, c, "Lawnmower", 0);
     pos = new PVector(r, c);
     vel = new PVector(10, 0);
     activate = false;
@@ -16,7 +15,7 @@ class Lawnmower{
   public void skill() {
       pos = Game.move(pos, vel, "R");
       for (int z = 0; z < Game.zombies.size(); z++) {
-        if (Game.zombies.get(z).pos.x <= pos.x && Game.zombies.get(z).pos.y == pos.y) {
+        if (zombies.get(z).pos.y == this.pos.y && zombies.get(z).pos.x <= pos.x && zombies.get(z).pos.y >= pos.y) {
           Game.zombies.remove(z);
           z--;
         }
