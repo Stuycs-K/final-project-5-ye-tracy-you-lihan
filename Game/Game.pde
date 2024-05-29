@@ -51,7 +51,7 @@ void draw()
     }
   }
   
-  if (getTick()%5 == 0) {
+  if (getTick()%0.5 == 0) {
     randomZombieSpawn();
   }
   zombieMove();
