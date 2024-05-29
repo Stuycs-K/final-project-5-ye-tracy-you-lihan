@@ -28,6 +28,7 @@ void draw()
   drawMenu();
   updateLawnmower();
   updatePeas();
+  updatePeas();
   tick++;
   
   for (int i = 0; i < plants.length; i++) {
@@ -110,10 +111,19 @@ void setup()
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
   sunflower.resize(90, 90);
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 46b51e870d74206161c0393dddf3f099017d29b8
   peashooter = loadImage("peaShooter.png");
   peashooter.resize(150,90);
   pea = loadImage("pea.png");
   pea.resize(60, 60);
+<<<<<<< HEAD
+>>>>>>> peashooter
+=======
+>>>>>>> 46b51e870d74206161c0393dddf3f099017d29b8
   lawnmower = loadImage("Lawnmower.png");
   lawnmower.resize(100, 100);
   zombie = loadImage("zombie.png");
@@ -187,10 +197,10 @@ void updatePeas() {
     System.out.println(currPea.pos.x);
     currPea.display();
     for (int z = 0; z < zombies.size(); z++) {
-      Zombie currZomb = zombies.get(z);
+      circle currZomb = zombies.get(z);
       if (currZomb.pos.x-80 <= currPea.pos.x && currZomb.pos.y == currPea.pos.y) {
-        currZomb.hp = currZomb.hp - 20;
-        peas.remove(p);
+        System.out.println(peas.remove(p));
+        currZomb.currHP = currZomb.currHP - 20;
       }
     }
     currPea.pos = move(currPea.pos, currPea.vel, "R");
@@ -325,7 +335,6 @@ void randomZombieSpawn() {
 void zombieMove() {
   for (Zombie z : zombies) {
     z.display();
-    
     
     int r = (int)((z.pos.x-200)/100);
     int c = (int)((z.pos.y-100)/100);

@@ -4,11 +4,11 @@ class Peashooter extends Entity{
   int maxHP, currHP, ATK, coolDown, t;
   
   public Peashooter() {
-    super(-100,-100, "Peashooter", 100);
+    super(-100,-100, "Peashooter", 100, 100);
   }
   
   public Peashooter(int r, int c) {
-    super(r, c, "Peashooter", 100);
+    super(r, c, "Peashooter", 100, 100);
     maxHP = 300;
     currHP = 300;
     ATK = 20;
