@@ -190,6 +190,7 @@ void updatePeas() {
       Zombie currZomb = zombies.get(z);
       if (currZomb.pos.x-80 <= currPea.pos.x && currZomb.pos.y == currPea.pos.y) {
         currZomb.hp = currZomb.hp - 20;
+        if (currZomb.hp <= 0) zombies.remove(z);
         peas.remove(p);
       }
     }
