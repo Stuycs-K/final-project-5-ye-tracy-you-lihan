@@ -3,11 +3,27 @@
 ## LI Han (Eric) You
 
 ### 05/22
-wrote abstract class Entity and its neccasry methods and variables. wrote contrustor for subclass and neccasry variables.
+wrote abstract class Entity and its neccasry methods and variables. wrote contrustor for subclass and neccsary variables.
 
 ### 05/23
 
-info
+started on peashooter, having diffucitles
+
+### 05/24
+swapped to working on lawnmower, got the spawning and updating done
+
+### 05/26
+finished lawnmower, works as intended
+
+### 05/27
+tried to merge onto main, had issues, fixed it, solved merging conflicts 
+
+### 05/28
+started on peashooter, got the basic mechanics down (shooting and damaging)
+
+### 05/29
+finished peashooter, placement works, fixed some merging errors, games work on a basic level
+
 
 
 ## Tracy Ye
