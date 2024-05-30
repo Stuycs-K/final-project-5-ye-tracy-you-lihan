@@ -13,6 +13,9 @@ static boolean activate;
 boolean select;
 PImage selection;
 
+boolean start;
+PImage load, windows, ex, file, pVz, mine, val, ffox, trash;
+
 // -------------------------------------------------------------------------
 static PImage sun;
 static PImage sunflower;
@@ -25,56 +28,60 @@ static PImage wallnut, halfwallnut;
 
 void draw() 
 {
-  drawBackground();
-  drawMenu();
-  updateLawnmower();
-  tick++;
-  
-  for (int i = 0; i < plants.length; i++) {
-    for (int j = 0; j < plants[0].length; j++) {
-      if (plants[i][j] != null) { 
-        plants[i][j].display();
-        plants[i][j].skill();
-      }
-    }
-  }
-  
-  randomSunDrop();
-  for (int i = 0; i < allSuns.size(); i++) {
-    Sun s = allSuns.get(i);
-    s.display();
-    if (s.stopPoint >= s.pos.y) {
-      s.pos = move(s.pos, s.vel, "D");
-    }
-    if (mousePressed) {
-      if (mouseX > s.pos.x && mouseX < s.pos.x+75 && mouseY > s.pos.y && mouseY < s.pos.y+75) {
-        allSuns.remove(s);
-        i--;
-        suns += 50;
-      }
-    }
-  }
-  
-  if (getTick()%5 == 0) {
-    randomZombieSpawn();
-  }
-  zombieMove();
-  
-  for(int z = 0; z < zombies.size(); z++) {
-    Zombie currZomb = zombies.get(z);
-    if(currZomb.pos.x < 220) {
-      for (int l = 0; l < lawnmowers.size(); l++) {
-        Lawnmower currLawn = lawnmowers.get(l);
-        if (currLawn.pos.y == currZomb.pos.y) {
-          currLawn.skill();
-          currLawn.activate = true;
+  if (start == false) {
+    drawStart();
+  } else {
+    drawBackground();
+    drawMenu();
+    updateLawnmower();
+    tick++;
+    
+    for (int i = 0; i < plants.length; i++) {
+      for (int j = 0; j < plants[0].length; j++) {
+        if (plants[i][j] != null) { 
+          plants[i][j].display();
+          plants[i][j].skill();
         }
       }
     }
-   }
-
-  if (select == true) {
-    followMouse(selection);
+    
+    randomSunDrop();
+    for (int i = 0; i < allSuns.size(); i++) {
+      Sun s = allSuns.get(i);
+      s.display();
+      if (s.stopPoint >= s.pos.y) {
+        s.pos = move(s.pos, s.vel, "D");
+      }
+      if (mousePressed) {
+        if (mouseX > s.pos.x && mouseX < s.pos.x+75 && mouseY > s.pos.y && mouseY < s.pos.y+75) {
+          allSuns.remove(s);
+          i--;
+          suns += 50;
+        }
+      }
+    }
+    
+    if (getTick()%4 == 0) {
+      randomZombieSpawn();
+    }
+    zombieMove();
+    
+    for(int z = 0; z < zombies.size(); z++) {
+      Zombie currZomb = zombies.get(z);
+      if(currZomb.pos.x < 220) {
+        for (int l = 0; l < lawnmowers.size(); l++) {
+          Lawnmower currLawn = lawnmowers.get(l);
+          if (currLawn.pos.y == currZomb.pos.y) {
+            currLawn.skill();
+            currLawn.activate = true;
+          }
+        }
+      }
+     }
+  
+    if (select == true) {
+      followMouse(selection);
+    }
   }
   updatePeas();
 }
@@ -84,7 +91,6 @@ void setup()
   
   frameRate(60);
   size (1200,750);
-  drawBackground();
 
   peas = new ArrayList<Pea>();
   
@@ -105,7 +111,9 @@ void setup()
   select = false;
   selection = sun;
   zombies = new ArrayList<Zombie>();
+  start = false;
   
+  //images for plants and zombies 
   sun = loadImage("sun.gif");
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
@@ -122,6 +130,26 @@ void setup()
   wallnut.resize(90, 90);
   halfwallnut = loadImage("halfwallnut.png");
   halfwallnut.resize(120, 120);
+  
+  // start menu 
+  load = loadImage("start.png");
+  load.resize((int)(1200*0.6),(int)(750*0.6));
+  windows = loadImage("windows.jpg");
+  windows.resize(1200,750);
+  ex = loadImage("ex.png");
+  ex.resize((int)(140*0.3),(int)(50*0.3));
+  file = loadImage("file.png");
+  file.resize(50,50);
+  pVz = loadImage("pVz.png");
+  pVz.resize(50,50);
+  mine = loadImage("mine.png");
+  mine.resize(50,50);
+  val = loadImage("val.png");
+  val.resize(50,50);
+  trash = loadImage("trash.png");
+  trash.resize(50,50);
+  ffox = loadImage("ffox.png");
+  ffox.resize(50,50);
 }
 
 
@@ -173,7 +201,6 @@ void drawBackground()
 }
 
 void updateLawnmower(){
-  //if (lawnmowers.size() > 0) {
     for(int l = 0; l < lawnmowers.size(); l++) {
       if (lawnmowers.get(l).activate) {
         lawnmowers.get(l).skill();
@@ -373,5 +400,27 @@ void zombieMove() {
     else if (getTick()%0.5 == 0) {
       z.pos = move(z.pos, z.vel, "L");
     }
+  }
+}
+
+void drawStart() {
+  image(windows,0,0);
+  stroke(#c9c9c9);
+  fill(#e6e6e6);
+  rect(345,105,10+(1200*0.6),20+(750*0.6), 10);
+  image(load, 350, 120);
+  image(ex, 1025,105);
+  
+  image(trash,20,30);
+  image(ffox,20,100);
+  image(val, 20, 170);
+  image(file, 20, 240);
+  image(file, 20, 310);
+  image(pVz, 160, 170);
+  image(mine, 90, 310);
+  image(file, 160, 380);
+  
+  if (mousePressed && mouseX > 350 && mouseX < 350+(int)(1200*0.6) && mouseY > 120 && mouseY < 120+(int)(750*0.6)) {
+    start = true;
   }
 }
