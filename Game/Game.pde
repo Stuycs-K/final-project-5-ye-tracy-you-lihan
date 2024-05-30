@@ -11,8 +11,9 @@ static Entity[] menu;
 static boolean activate;
 boolean select;
 PImage selection;
+
 boolean start;
-PImage load, windows, ex;
+PImage load, windows, ex, file, pVz, mine, val, ffox, trash;
 
 // -------------------------------------------------------------------------
 static PImage sun;
@@ -111,12 +112,25 @@ void setup()
   lawnmower.resize(100, 100);
   zombie = loadImage("zombie.png");
   zombie.resize(90,120);
+  
   load = loadImage("start.png");
   load.resize((int)(1200*0.6),(int)(750*0.6));
   windows = loadImage("windows.jpg");
   windows.resize(1200,750);
   ex = loadImage("ex.png");
   ex.resize((int)(140*0.3),(int)(50*0.3));
+  file = loadImage("file.png");
+  file.resize(50,50);
+  pVz = loadImage("pVz.png");
+  pVz.resize(50,50);
+  mine = loadImage("mine.png");
+  mine.resize(50,50);
+  val = loadImage("val.png");
+  val.resize(50,50);
+  trash = loadImage("trash.png");
+  trash.resize(50,50);
+  ffox = loadImage("ffox.png");
+  ffox.resize(50,50);
 }
 
 
@@ -303,4 +317,19 @@ void drawStart() {
   rect(345,105,10+(1200*0.6),20+(750*0.6), 10);
   image(load, 350, 120);
   image(ex, 1025,105);
+  
+  image(trash,20,30);
+  image(ffox,20,100);
+  image(val, 20, 170);
+  image(file, 20, 240);
+  image(file, 20, 310);
+  image(pVz, 160, 170);
+  image(mine, 90, 310);
+  image(file, 160, 380);
+  
+  //((int)(1200*0.6),(int)(750*0.6));
+  
+  if (mousePressed && mouseX > 350 && mouseX < 350+(int)(1200*0.6) && mouseY > 120 && mouseY < 120+(int)(750*0.6)) {
+    start = true;
+  }
 }
