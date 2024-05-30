@@ -28,7 +28,6 @@ void draw()
   drawBackground();
   drawMenu();
   updateLawnmower();
-  updatePeas();
   tick++;
   
   for (int i = 0; i < plants.length; i++) {
@@ -77,7 +76,7 @@ void draw()
   if (select == true) {
     followMouse(selection);
   }
-
+  updatePeas();
 }
 
 void setup() 
