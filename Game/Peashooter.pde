@@ -20,10 +20,6 @@ class Peashooter extends Entity{
     image(peashooter, ((getRow()+2)*100)-20, (getCol()+1)*100);
   }
   
-  void display(int x, int y) {
-    image(peashooter, x, y);
-  }
-  
   void skill() {
     if ((getTick()+t)%1.5 == 0) {
       Game.peas.add(new Pea(((getRow()+2)*100)-20, (getCol()+1)*100));

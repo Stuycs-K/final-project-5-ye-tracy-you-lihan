@@ -11,6 +11,9 @@ public class Sun {
     stopPoint = int(random(150,500));
   }
   
+  int getX() { return (int) pos.x; }
+  int getY() { return (int) pos.y; }
+  
   void display() {
     image(sun, pos.x, pos.y);
   }

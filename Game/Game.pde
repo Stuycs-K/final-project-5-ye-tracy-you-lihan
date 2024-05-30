@@ -20,6 +20,7 @@ static PImage lawnmower;
 static PImage peashooter;
 static PImage pea;
 static PImage zombie;
+static PImage wallnut, halfwallnut;
 // -------------------------------------------------------------------------
 
 void draw() 
@@ -95,17 +96,17 @@ void setup()
   }
   
   allSuns = new ArrayList<Sun>();
-  suns = 50;
+  suns = 1000;
 
   plants = new Entity[9][5];
-  menu = new Entity[2];
+  menu = new Entity[3];
   menu[0] = new Sunflower();
   menu[1] = new Peashooter();
+  menu[2] = new Wallnut();
   select = false;
   selection = sun;
   zombies = new ArrayList<Zombie>();
   
- 
   sun = loadImage("sun.gif");
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
@@ -118,6 +119,10 @@ void setup()
   lawnmower.resize(100, 100);
   zombie = loadImage("zombie.png");
   zombie.resize(90,120);
+  wallnut = loadImage("walnut.png");
+  wallnut.resize(90, 90);
+  halfwallnut = loadImage("halfwallnut.png");
+  halfwallnut.resize(120, 120);
 }
 
 
@@ -207,12 +212,16 @@ void randomSunDrop()
 
 void drawMenu()
 {
-  fill(#e6dcc3);
-  rect(25,625,200,100);
-  fill(0, 100);
-  textSize(22);
+  //fill(#e6dcc3);
+  //rect(25,625,200,100);
+  //fill(0, 100);
+  //textSize(22);
   for (Entity x : menu) {
     if (x.getName().equals("Sunflower")) {
+      fill(#e6dcc3);
+      rect(25,625,200,100);
+      fill(0, 100);
+      textSize(22);
       text(x.getName(), 125, 655);
       image(sunflower, 30, 630);
       if (suns < x.getCost()) {
@@ -232,6 +241,18 @@ void drawMenu()
       }
       textSize(50);
       text(x.getCost(), 375, 705);
+    } else if (x.getName().equals("Wallnut")) {
+      fill(#e6dcc3);
+      rect(525,625,200,100);
+      fill(0, 100);
+      textSize(22);
+      text(x.getName(), 635, 655);
+      image(wallnut, 538, 630);
+      if (suns < x.getCost()) {
+        fill(#ff0000, 150);
+      }
+      textSize(50);
+      text(x.getCost(), 635, 705);
     }
   }
 }
@@ -241,6 +262,7 @@ void mouseClicked() {
     if (suns >= menu[0].getCost()) {
       select = true;
       selection = sunflower;
+      followMouse(selection);
     }
     else {
       fill(#ff0000, 150);
@@ -250,6 +272,17 @@ void mouseClicked() {
     if (suns >= menu[1].getCost()) {
       select = true;
       selection = peashooter;
+      followMouse(selection);
+    }
+    else {
+      fill(#ff0000, 150);
+      rect(25, 625, 200, 100);
+    }
+  }  else if (mouseX > 525 && mouseX < 725 && mouseY > 625 && mouseY < 725) {
+    if (suns >= menu[2].getCost()) {
+      select = true;
+      selection = wallnut;
+      followMouse(selection);
     }
     else {
       fill(#ff0000, 150);
@@ -275,6 +308,9 @@ void mouseReleased() {
           suns -= 50;
         } else if (selection == peashooter) {
           plants[r][c] = new Peashooter(r,c);
+          suns -= 100;
+        } else if (selection == wallnut) {
+          plants[r][c] = new Wallnut(r,c);
           suns -= 100;
         }
       }
@@ -326,7 +362,6 @@ void randomZombieSpawn() {
 void zombieMove() {
   for (Zombie z : zombies) {
     z.display();
-    
     
     int r = (int)((z.pos.x-200)/100);
     int c = (int)((z.pos.y-100)/100);
