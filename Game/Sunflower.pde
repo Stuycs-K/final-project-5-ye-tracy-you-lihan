@@ -1,17 +1,16 @@
 import java.util.*;
 
 public class Sunflower extends Entity{
-  int ATK, coolDown, t;
+  int ATK, t;
   PImage img;
   
   public Sunflower() {
-    super(-100,-100, "Sunflower", 50, 300);
+    super(-100,-100, "Sunflower", 50, 300, 0, 5);
   }
   
   public Sunflower(int r, int c) {
-    super(r, c, "Sunflower", 50, 300);
+    super(r, c, "Sunflower", 50, 300, 0, 5);
     ATK = 0;
-    coolDown = 5;
     img = sunflower;
     t = (int)getTick()%5;
   }
