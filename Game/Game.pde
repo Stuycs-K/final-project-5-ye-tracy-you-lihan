@@ -35,6 +35,7 @@ void draw()
     drawMenu();
     updateLawnmower();
     tick++;
+    cooldown();
     
     for (int i = 0; i < plants.length; i++) {
       for (int j = 0; j < plants[0].length; j++) {
@@ -285,7 +286,7 @@ void drawMenu()
 
 void mouseClicked() {
   if (mouseX > 25 && mouseX < 225 && mouseY > 625 && mouseY < 725) {
-    if (suns >= menu[0].getCost()) {
+    if (suns >= menu[0].getCost() && menu[0].getCooldown() == 0) {
       select = true;
       selection = sunflower;
       followMouse(selection);
@@ -294,8 +295,9 @@ void mouseClicked() {
       fill(#ff0000, 150);
       rect(25, 625, 200, 100);
     }
-  } else if (mouseX > 275 && mouseX < 475 && mouseY > 625 && mouseY < 725) {
-    if (suns >= menu[1].getCost()) {
+  } 
+  else if (mouseX > 275 && mouseX < 475 && mouseY > 625 && mouseY < 725) {
+    if (suns >= menu[1].getCost() && menu[1].getCooldown() == 0) {
       select = true;
       selection = peashooter;
       followMouse(selection);
@@ -312,7 +314,7 @@ void mouseClicked() {
     }
     else {
       fill(#ff0000, 150);
-      rect(25, 625, 200, 100);
+      rect(275, 625, 200, 100);
     }
   }
 }
@@ -332,12 +334,15 @@ void mouseReleased() {
         if (selection == sunflower) {
           plants[r][c] = new Sunflower(r,c);
           suns -= 50;
+          menu[0].setCooldown();
         } else if (selection == peashooter) {
           plants[r][c] = new Peashooter(r,c);
           suns -= 100;
+          menu[1].setCooldown();
         } else if (selection == wallnut) {
           plants[r][c] = new Wallnut(r,c);
           suns -= 100;
+          menu[2].setCooldown();
         }
       }
     }
@@ -422,5 +427,19 @@ void drawStart() {
   
   if (mousePressed && mouseX > 350 && mouseX < 350+(int)(1200*0.6) && mouseY > 120 && mouseY < 120+(int)(750*0.6)) {
     start = true;
+  }
+}
+
+void cooldown() {
+  for (int i = 0; i < menu.length; i++) {
+    Entity x = menu[i];
+    if (getTick()%1 == 0) {
+      if (x.getCooldown() > 0) {
+        x.minusCooldown();
+      }
+    }
+    noStroke();
+    fill(#807061,150);
+    rect(25+250*i, 625, 200, 100*((float)(x.getCooldown())/x.getOGC()));
   }
 }

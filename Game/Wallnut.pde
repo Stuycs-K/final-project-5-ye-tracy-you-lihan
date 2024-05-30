@@ -1,14 +1,10 @@
 class Wallnut extends Entity {
-  
-  int t;
   public Wallnut() {
-    super(-100,-100, "Wallnut", 100, 300);
+    super(-100,-100, "Wallnut", 100, 300, 5, 15);
   }
   
   public Wallnut(int r, int c) {
-    super(r, c, "Wallnut", 100, 300);
-    //coolDown = 5;
-    t = (int)getTick()%5;
+    super(r, c, "Wallnut", 100, 2000, 10, 20);
   }
   
   void display() {

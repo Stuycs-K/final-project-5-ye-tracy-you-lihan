@@ -1,18 +1,17 @@
 import java.util.*;
 
 class Peashooter extends Entity{
-  int maxHP, currHP, ATK, coolDown, t;
+  int maxHP, currHP, ATK, t;
   
   public Peashooter() {
-    super(-100,-100, "Peashooter", 100, 100);
+    super(-100,-100, "Peashooter", 100, 100, 5, 5);
   }
   
   public Peashooter(int r, int c) {
-    super(r, c, "Peashooter", 100, 100);
+    super(r, c, "Peashooter", 100, 100, 5, 5);
     maxHP = 300;
     currHP = 300;
     ATK = 20;
-    coolDown = 2;
     t = (int)getTick()%5;
   }
   
