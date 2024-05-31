@@ -25,5 +25,10 @@ public class Zombie{
       x.setHP(this.atk);
     }
   }
+  public void debuff(String type) {
+    if (type.equals("ice")) {
+      println("e");
+    }
+  }
   
 }

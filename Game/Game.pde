@@ -24,6 +24,8 @@ static PImage peashooter;
 static PImage pea;
 static PImage zombie;
 static PImage wallnut, halfwallnut;
+static PImage ice;
+static PImage fZombie;
 // -------------------------------------------------------------------------
 
 void draw() 
@@ -41,7 +43,9 @@ void draw()
       for (int j = 0; j < plants[0].length; j++) {
         if (plants[i][j] != null) { 
           plants[i][j].display();
-          plants[i][j].skill();
+          if (!plants[i][j].getName().equals("Ice")) {
+            plants[i][j].skill();
+          }
         }
       }
     }
@@ -85,6 +89,7 @@ void draw()
     }
   }
   updatePeas();
+  
 }
 
 void setup() 
@@ -92,23 +97,23 @@ void setup()
   
   frameRate(60);
   size (1200,750);
+  activate = false;
 
   peas = new ArrayList<Pea>();
-  
-  activate = false;
   lawnmowers = new ArrayList<Lawnmower>();
   for(int y = 100; y < 600; y += 100) {
     lawnmowers.add(new Lawnmower(120, y));
   }
   
   allSuns = new ArrayList<Sun>();
-  suns = 1000;
+  suns = 75;
 
   plants = new Entity[9][5];
-  menu = new Entity[3];
+  menu = new Entity[4];
   menu[0] = new Sunflower();
   menu[1] = new Peashooter();
   menu[2] = new Wallnut();
+  menu[3] = new Ice();
   select = false;
   selection = sun;
   zombies = new ArrayList<Zombie>();
@@ -131,6 +136,10 @@ void setup()
   wallnut.resize(90, 90);
   halfwallnut = loadImage("halfwallnut.png");
   halfwallnut.resize(120, 120);
+  ice = loadImage("ice.png");
+  ice.resize(90, 90);
+  fZombie = loadImage("frozenZombie.png");
+  fZombie.resize(90, 120);
   
   // start menu 
   load = loadImage("start.png");
@@ -216,7 +225,6 @@ void updateLawnmower(){
 void updatePeas() {
   for (int p = 0; p < peas.size(); p++) {
     Pea currPea = peas.get(p);
-    System.out.println(currPea.pos.x);
     currPea.display();
     for (int z = 0; z < zombies.size(); z++) {
       Zombie currZomb = zombies.get(z);
@@ -239,10 +247,6 @@ void randomSunDrop()
 
 void drawMenu()
 {
-  //fill(#e6dcc3);
-  //rect(25,625,200,100);
-  //fill(0, 100);
-  //textSize(22);
   for (Entity x : menu) {
     if (x.getName().equals("Sunflower")) {
       fill(#e6dcc3);
@@ -256,7 +260,8 @@ void drawMenu()
       }
       textSize(50);
       text(x.getCost(), 145, 705);
-    } else if (x.getName().equals("Peashooter")) {
+    } 
+    else if (x.getName().equals("Peashooter")) {
       fill(#e6dcc3);
       rect(275,625,200,100);
       fill(0, 100);
@@ -268,7 +273,8 @@ void drawMenu()
       }
       textSize(50);
       text(x.getCost(), 375, 705);
-    } else if (x.getName().equals("Wallnut")) {
+    } 
+    else if (x.getName().equals("Wallnut")) {
       fill(#e6dcc3);
       rect(525,625,200,100);
       fill(0, 100);
@@ -281,6 +287,19 @@ void drawMenu()
       textSize(50);
       text(x.getCost(), 635, 705);
     }
+    else if (x.getName().equals("Ice")) {
+      fill(#e6dcc3);
+      rect(775,625,200,100);
+      fill(0, 100);
+      textSize(22);
+      text(x.getName(), 895, 655);
+      image(ice, 775, 630);
+      if (suns < x.getCost()) {
+        fill(#ff0000, 150);
+      }
+      textSize(50);
+      text(x.getCost(), 900, 705);
+    } 
   }
 }
 
@@ -304,17 +323,29 @@ void mouseClicked() {
     }
     else {
       fill(#ff0000, 150);
-      rect(25, 625, 200, 100);
+      rect(275, 625, 200, 100);
     }
-  }  else if (mouseX > 525 && mouseX < 725 && mouseY > 625 && mouseY < 725) {
-    if (suns >= menu[2].getCost()) {
+  }  
+  else if (mouseX > 525 && mouseX < 725 && mouseY > 625 && mouseY < 725) {
+    if (suns >= menu[2].getCost() && menu[2].getCooldown() == 0) {
       select = true;
       selection = wallnut;
       followMouse(selection);
     }
     else {
       fill(#ff0000, 150);
-      rect(275, 625, 200, 100);
+      rect(525, 625, 200, 100);
+    }
+  }
+  else if (mouseX > 775 && mouseX < 925 && mouseY > 625 && mouseY < 725) {
+    if (suns >= menu[3].getCost() && menu[3].getCooldown() == 0) {
+      select = true;
+      selection = ice;
+      followMouse(selection);
+    }
+    else {
+      fill(#ff0000, 150);
+      rect(775, 625, 200, 100);
     }
   }
 }
@@ -343,6 +374,10 @@ void mouseReleased() {
           plants[r][c] = new Wallnut(r,c);
           suns -= 100;
           menu[2].setCooldown();
+        } else if (selection == ice) {
+          plants[r][c] = new Ice(r,c);
+          suns -= 0;
+          menu[3].setCooldown();
         }
       }
     }
@@ -397,7 +432,12 @@ void zombieMove() {
     int r = (int)((z.pos.x-200)/100);
     int c = (int)((z.pos.y-100)/100);
     if (r > -1 && r < 9 && c > -1 && c < 5 && plants[r][c] != null) {
-      z.attack(plants[r][c]);
+      if (plants[r][c].getName().equals("Ice")) {
+        plants[r][c].skill();
+      }
+      else {
+        z.attack(plants[r][c]);
+      }
       if (plants[r][c].getHP() == 0) {
         plants[r][c] = null;
       }
