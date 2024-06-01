@@ -14,7 +14,9 @@ boolean select;
 PImage selection;
 
 boolean start;
+boolean end;
 PImage load, windows, ex, file, pVz, mine, val, ffox, trash;
+PImage endscreen;
 
 // -------------------------------------------------------------------------
 static PImage sun;
@@ -30,10 +32,15 @@ void draw()
 {
   if (start == false) {
     drawStart();
-  } else {
+  } else if (end == true){
+    image(endscreen, 0, 0);
+    //exit to map butto n -> rect(357, 642, 182, 61);
+    //retry button -> rect(665, 635, 178, 87);
+  }else {
     drawBackground();
     drawMenu();
     updateLawnmower();
+    checkDeath();
     tick++;
     cooldown();
     
@@ -83,8 +90,8 @@ void draw()
     if (select == true) {
       followMouse(selection);
     }
+    updatePeas();
   }
-  updatePeas();
 }
 
 void setup() 
@@ -112,7 +119,8 @@ void setup()
   select = false;
   selection = sun;
   zombies = new ArrayList<Zombie>();
-  start = false;
+  start = false;;
+  end = true;
   
   //images for plants and zombies 
   sun = loadImage("sun.gif");
@@ -151,6 +159,10 @@ void setup()
   trash.resize(50,50);
   ffox = loadImage("ffox.png");
   ffox.resize(50,50);
+  
+  //end screen 
+  endscreen = loadImage("endScreen.jpg");
+  endscreen.resize(1200, 750);
 }
 
 
@@ -201,6 +213,12 @@ void drawBackground()
    text("SUNS : " + suns, 995, 48);
 }
 
+void checkDeath() {
+  for (Zombie z : zombies) {
+    if (z.pos.x < 50) end = true;
+  }
+}
+
 void updateLawnmower(){
     for(int l = 0; l < lawnmowers.size(); l++) {
       if (lawnmowers.get(l).activate) {
@@ -239,10 +257,6 @@ void randomSunDrop()
 
 void drawMenu()
 {
-  //fill(#e6dcc3);
-  //rect(25,625,200,100);
-  //fill(0, 100);
-  //textSize(22);
   for (Entity x : menu) {
     if (x.getName().equals("Sunflower")) {
       fill(#e6dcc3);
@@ -304,17 +318,17 @@ void mouseClicked() {
     }
     else {
       fill(#ff0000, 150);
-      rect(25, 625, 200, 100);
+      rect(275, 625, 200, 100);
     }
   }  else if (mouseX > 525 && mouseX < 725 && mouseY > 625 && mouseY < 725) {
-    if (suns >= menu[2].getCost()) {
+    if (suns >= menu[2].getCost() && menu[2].getCooldown() == 0) {
       select = true;
       selection = wallnut;
       followMouse(selection);
     }
     else {
       fill(#ff0000, 150);
-      rect(275, 625, 200, 100);
+      rect(525, 625, 200, 100);
     }
   }
 }
@@ -424,7 +438,7 @@ void drawStart() {
   image(pVz, 160, 170);
   image(mine, 90, 310);
   image(file, 160, 380);
-  
+   //start button - > rect(469,490, 470, 58);
   if (mousePressed && mouseX > 350 && mouseX < 350+(int)(1200*0.6) && mouseY > 120 && mouseY < 120+(int)(750*0.6)) {
     start = true;
   }
