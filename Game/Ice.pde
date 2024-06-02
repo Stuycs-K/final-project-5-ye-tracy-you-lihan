@@ -22,7 +22,7 @@ public class Ice extends Entity{
     for (Zombie z : zombies) {
       int myX = (getRow()+2)*100;
       int myY = (getCol()+1)*100;
-      if (z.pos.x > myX && z.pos.x < myX+100 && z.pos.y == myY) {
+      if (z.pos.x > myX-20 && z.pos.x < myX+100 && z.pos.y == myY) {
         z.debuff("ice");
         setHP(1);
         break;
