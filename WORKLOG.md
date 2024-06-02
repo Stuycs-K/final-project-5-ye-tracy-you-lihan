@@ -55,3 +55,7 @@ Bug discovery, started working on zombie. Zombies stutter walk & trigger lawnmow
 ### 05/29
 
 Creating an opening screen for the game.
+
+### 5/30-6/2
+
+Working on and then finished ice plant, caught and fixed some bugs
