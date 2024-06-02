@@ -16,7 +16,7 @@ public class Sunflower extends Entity{
   }
   
   public void display() {
-    image(sunflower, (getRow()+2)*100, (getCol()+1)*100);
+    image(img, (getRow()+2)*100, (getCol()+1)*100);
   }
   
   public void skill() {
