@@ -406,20 +406,20 @@ public static PVector move(PVector position, PVector velocity, String dir)
 }
 
 void randomZombieSpawn() {
-  int x = (int)random(10);
-  if (x == 5) {
+  int x = (int)random(8);
+  if (x == 0) {
     zombies.add(new Zombie(1200,100));
   }
-  else if (x == 6) {
+  else if (x == 1) {
     zombies.add(new Zombie(1200,200));
   }
-  else if (x == 7) {
+  else if (x == 2) {
     zombies.add(new Zombie(1200,300));
   }
-  else if (x == 8) {
+  else if (x == 3) {
     zombies.add(new Zombie(1200,400));
   }
-  else if (x == 9) {
+  else if (x == 4) {
     zombies.add(new Zombie(1200,500));
   }
   
@@ -427,24 +427,30 @@ void randomZombieSpawn() {
 
 void zombieMove() {
   for (Zombie z : zombies) {
+    if (z.getFreeze() > 0) {
+      if (getTick()%1 == 0) {
+        z.setFreeze();
+      }
+    }
+    else {
+      int r = (int)((z.pos.x-200)/100);
+      int c = (int)((z.pos.y-100)/100);
+      if (r > -1 && r < 9 && c > -1 && c < 5 && plants[r][c] != null) {
+        if (plants[r][c].getName().equals("Ice")) {
+          plants[r][c].skill();
+        }
+        else {
+          z.attack(plants[r][c]);
+        }
+        if (plants[r][c].getHP() == 0) {
+          plants[r][c] = null;
+        }
+      }
+      else if (getTick()%0.5 == 0) {
+        z.pos = move(z.pos, z.vel, "L");
+      }
+    }
     z.display();
-    
-    int r = (int)((z.pos.x-200)/100);
-    int c = (int)((z.pos.y-100)/100);
-    if (r > -1 && r < 9 && c > -1 && c < 5 && plants[r][c] != null) {
-      if (plants[r][c].getName().equals("Ice")) {
-        plants[r][c].skill();
-      }
-      else {
-        z.attack(plants[r][c]);
-      }
-      if (plants[r][c].getHP() == 0) {
-        plants[r][c] = null;
-      }
-    }
-    else if (getTick()%0.5 == 0) {
-      z.pos = move(z.pos, z.vel, "L");
-    }
   }
 }
 

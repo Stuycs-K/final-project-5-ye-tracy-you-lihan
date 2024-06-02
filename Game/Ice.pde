@@ -21,12 +21,11 @@ public class Ice extends Entity{
   public void skill() {
     for (Zombie z : zombies) {
       int myX = (getRow()+2)*100;
-      int myY = (getRow()+1)*100;
-      println(myX);
-      println(myY);
-      if (z.pos.x > myX && z.pos.x < myX+100 && z.pos.y > myY && z.pos.y < myY+100) {
+      int myY = (getCol()+1)*100;
+      if (z.pos.x > myX && z.pos.x < myX+100 && z.pos.y == myY) {
         z.debuff("ice");
         setHP(1);
+        break;
       }
     }
   }
