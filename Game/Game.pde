@@ -216,10 +216,10 @@ void updateLawnmower(){
 void updatePeas() {
   for (int p = 0; p < peas.size(); p++) {
     Pea currPea = peas.get(p);
-    currPea.display();
+    int intialX = (int)currPea.pos.x;
     for (int z = 0; z < zombies.size(); z++) {
       Zombie currZomb = zombies.get(z);
-      if (currZomb.pos.x-80 <= currPea.pos.x && currZomb.pos.y == currPea.pos.y) {
+      if (currZomb.pos.x > intialX && currZomb.pos.x-80 <= currPea.pos.x && currZomb.pos.y == currPea.pos.y) {
         peas.remove(p);
         currZomb.hp = currZomb.hp - currPea.getATK();
         if (currZomb.hp <= 0) {
@@ -229,6 +229,7 @@ void updatePeas() {
       }
     }
     currPea.pos = move(currPea.pos, currPea.vel, "R");
+    currPea.display();
   }
 }
 
