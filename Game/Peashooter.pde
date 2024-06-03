@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Peashooter extends Entity{
-  int tickDelay;
+  private int tickDelay;
   
   public Peashooter() {
     super("Peashooter", peashooter, -100, -100, 100, 300, 20, 5, 5);

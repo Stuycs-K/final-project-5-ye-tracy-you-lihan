@@ -18,7 +18,7 @@ public class Ice extends Entity{
     for (Zombie z : zombies) {
       int myX = (getRow()+2)*100;
       int myY = (getCol()+1)*100;
-      if (z.getX() >= myX-100 && z.getX() < myX+70 && z.getY() == myY) {
+      if (z.getX() >= myX-100 && z.getX() < myX+100 && z.getY() == myY) {
         z.debuff("ice");
         setHP(1);
         break;

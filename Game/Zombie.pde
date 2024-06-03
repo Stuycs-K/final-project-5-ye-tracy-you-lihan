@@ -25,7 +25,7 @@ public class Zombie{
   public void setPos(PVector x) { pos = x; }
   
   public void display() {
-    image(img, pos.x, pos.y-15);
+    image(img, pos.x-45, pos.y-15);
   }
   
   public void attack(Entity x) {
