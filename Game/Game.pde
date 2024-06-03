@@ -216,14 +216,15 @@ void updateLawnmower(){
 void updatePeas() {
   for (int p = 0; p < peas.size(); p++) {
     Pea currPea = peas.get(p);
-    System.out.println(currPea.pos.x);
     currPea.display();
     for (int z = 0; z < zombies.size(); z++) {
       Zombie currZomb = zombies.get(z);
       if (currZomb.pos.x-80 <= currPea.pos.x && currZomb.pos.y == currPea.pos.y) {
-        currZomb.hp = currZomb.hp - 20;
-        if (currZomb.hp <= 0) zombies.remove(z);
         peas.remove(p);
+        currZomb.hp = currZomb.hp - currPea.getATK();
+        if (currZomb.hp <= 0) {
+          zombies.remove(z);
+        }
         p--;
       }
     }
@@ -240,10 +241,6 @@ void randomSunDrop()
 
 void drawMenu()
 {
-  //fill(#e6dcc3);
-  //rect(25,625,200,100);
-  //fill(0, 100);
-  //textSize(22);
   for (Entity x : menu) {
     if (x.getName().equals("Sunflower")) {
       fill(#e6dcc3);
