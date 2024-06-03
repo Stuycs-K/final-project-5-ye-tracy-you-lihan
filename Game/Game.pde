@@ -220,19 +220,20 @@ void updateLawnmower(){
 void updatePeas() {
   for (int p = 0; p < peas.size(); p++) {
     Pea currPea = peas.get(p);
-    currPea.display();
+    int intialX = (int)currPea.pos.x;
     for (int z = 0; z < zombies.size(); z++) {
       Zombie currZomb = zombies.get(z);
-      if (currZomb.getX()-80 <= currPea.getX() && currZomb.getY() == currPea.getY()) {
-        currZomb.setHP(currZomb.getHP() - 20);
-        if (currZomb.getHP() <= 0) {
+      if (currZomb.pos.x > intialX && currZomb.pos.x-80 <= currPea.pos.x && currZomb.pos.y == currPea.pos.y) {
+        peas.remove(p);
+        currZomb.hp = currZomb.hp - currPea.getATK();
+        if (currZomb.hp <= 0) {
           zombies.remove(z);
         }
-        peas.remove(p);
         p--;
       }
     }
-    currPea.setPos(move(currPea.pos, currPea.vel, "R"));
+    currPea.pos = move(currPea.pos, currPea.vel, "R");
+    currPea.display();
   }
 }
 
@@ -307,41 +308,34 @@ void mouseClicked() {
       select = true;
       selection = sunflower;
       followMouse(selection);
-    }
-    else {
+    } else {
       fill(#ff0000, 150);
       rect(25, 625, 200, 100);
     }
-  } 
-  else if (mouseX > 275 && mouseX < 475 && mouseY > 625 && mouseY < 725) {
+  } else if (mouseX > 275 && mouseX < 475 && mouseY > 625 && mouseY < 725) {
     if (suns >= menu[1].getCost() && menu[1].getCooldown() == 0) {
       select = true;
       selection = peashooter;
       followMouse(selection);
-    }
-    else {
+    } else {
       fill(#ff0000, 150);
       rect(275, 625, 200, 100);
     }
-  }  
-  else if (mouseX > 525 && mouseX < 725 && mouseY > 625 && mouseY < 725) {
+  } else if (mouseX > 525 && mouseX < 725 && mouseY > 625 && mouseY < 725) {
     if (suns >= menu[2].getCost() && menu[2].getCooldown() == 0) {
       select = true;
       selection = wallnut;
       followMouse(selection);
-    }
-    else {
+    } else {
       fill(#ff0000, 150);
       rect(525, 625, 200, 100);
     }
-  }
-  else if (mouseX > 775 && mouseX < 925 && mouseY > 625 && mouseY < 725) {
+  } else if (mouseX > 775 && mouseX < 925 && mouseY > 625 && mouseY < 725) {
     if (suns >= menu[3].getCost() && menu[3].getCooldown() == 0) {
       select = true;
       selection = ice;
       followMouse(selection);
-    }
-    else {
+    } else {
       fill(#ff0000, 150);
       rect(775, 625, 200, 100);
     }

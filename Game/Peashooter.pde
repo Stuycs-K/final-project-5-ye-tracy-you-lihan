@@ -17,6 +17,7 @@ public class Peashooter extends Entity{
     image(getImg(), ((getRow()+2)*100)-20, (getCol()+1)*100);
   }
   
+  
   void skill() {
     if ((getTick()+tickDelay)%1.5 == 0) {
       Game.peas.add(new Pea(((getRow()+2)*100)-20, (getCol()+1)*100));
