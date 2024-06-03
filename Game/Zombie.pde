@@ -1,9 +1,9 @@
 import java.util.*;
 
 public class Zombie{
-  PVector pos, vel;
-  int hp, atk, freeze;
-  PImage img;
+  private PVector pos, vel;
+  private int hp, atk, freeze;
+  private PImage img;
   
   public Zombie(int x, int y) {
     pos = new PVector(x, y);
@@ -13,6 +13,16 @@ public class Zombie{
     img = zombie;
     freeze = 0;
   }
+  
+  public PVector getPos() { return pos; }
+  public float getX() { return pos.x; }
+  public float getY() { return pos.y; }
+  public int getHP() { return hp; }
+  public PVector getVel() { return vel; }
+  public int getFreeze() { return freeze; }
+  
+  public void setHP(int x) { hp = x; }
+  public void setPos(PVector x) { pos = x; }
   
   public void display() {
     image(img, pos.x, pos.y-15);
@@ -42,9 +52,4 @@ public class Zombie{
     vel = new PVector(10,0);
     }
   }
-  
-  public int getFreeze() {
-    return freeze;
-  }
-  
 }

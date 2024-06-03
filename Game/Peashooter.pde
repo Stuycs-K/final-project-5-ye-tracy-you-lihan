@@ -1,24 +1,24 @@
 import java.util.*;
 
 public class Peashooter extends Entity{
-  int ATK, t;
+  int tickDelay;
   
   public Peashooter() {
-    super(-100,-100, "Peashooter", 100, 300, 5, 5);
+    super("Peashooter", peashooter, -100, -100, 100, 300, 20, 5, 5);
+    tickDelay = (int)getTick()%5;
   }
   
   public Peashooter(int r, int c) {
-    super(r, c, "Peashooter", 100, 300, 5, 5);
-    ATK = 20;
-    t = (int)getTick()%5;
+    super("Peashooter", peashooter, r, c, 100, 300, 20, 5, 5);
+    tickDelay = (int)getTick()%5;
   }
   
   void display() {
-    image(peashooter, ((getRow()+2)*100)-20, (getCol()+1)*100);
+    image(getImg(), ((getRow()+2)*100)-20, (getCol()+1)*100);
   }
   
   void skill() {
-    if ((getTick()+t)%1.5 == 0) {
+    if ((getTick()+tickDelay)%1.5 == 0) {
       Game.peas.add(new Pea(((getRow()+2)*100)-20, (getCol()+1)*100));
     }
   }

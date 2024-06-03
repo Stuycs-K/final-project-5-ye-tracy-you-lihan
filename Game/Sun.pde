@@ -1,9 +1,9 @@
 import java.util.*;
 
 public class Sun {
-  PVector pos;
-  PVector vel;
-  int stopPoint;
+  private PVector pos;
+  private PVector vel;
+  private int stopPoint;
   
   public Sun(int x, int y, int vx, int vy) {
     pos = new PVector(x,y);
@@ -11,8 +11,13 @@ public class Sun {
     stopPoint = int(random(150,500));
   }
   
-  int getX() { return (int) pos.x; }
-  int getY() { return (int) pos.y; }
+  public int getX() { return (int)pos.x; }
+  public int getY() { return (int)pos.y; }
+  public PVector getPos() { return pos; }
+  public PVector getVel() { return vel; }
+  public int getStopPoint() { return stopPoint; }
+  
+  public void setPos(PVector x) { pos = x; }
   
   void display() {
     image(sun, pos.x, pos.y);

@@ -1,28 +1,24 @@
 import java.util.*;
 
 public class Ice extends Entity{
-  int ATK;
-  PImage img;
   
   public Ice() {
-    super(-100, -100, "Ice", 0, 1, 10, 10);
+    super("Ice", ice, -100, -100, 0, 1, 0, 10, 10);
   }
   
   public Ice(int r, int c) {
-    super(r, c, "Ice", 0, 1, 10, 10);
-    ATK = 0;
-    img = ice;
+    super("Ice", ice, r, c, 0, 1, 0, 10, 10);
   }
   
   public void display() {
-    image(img, (getRow()+2)*100, (getCol()+1)*100);
+    image(getImg(), (getRow()+2)*100, (getCol()+1)*100);
   }
   
   public void skill() {
     for (Zombie z : zombies) {
       int myX = (getRow()+2)*100;
       int myY = (getCol()+1)*100;
-      if (z.pos.x > myX-20 && z.pos.x < myX+100 && z.pos.y == myY) {
+      if (z.getX() >= myX-100 && z.getX() < myX+70 && z.getY() == myY) {
         z.debuff("ice");
         setHP(1);
         break;

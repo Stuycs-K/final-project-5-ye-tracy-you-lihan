@@ -1,20 +1,23 @@
-class Wallnut extends Entity {
+import java.util.*;
+
+public class Wallnut extends Entity {
+  
   public Wallnut() {
-    super(-100,-100, "Wallnut", 100, 300, 5, 15);
+    super("Wallnut", wallnut, -100, -100, 100, 2000, 0, 10, 10);
   }
   
   public Wallnut(int r, int c) {
-    super(r, c, "Wallnut", 100, 2000, 10, 20);
+    super("Wallnut", wallnut, r, c, 100, 2000, 0, 10, 10);
   }
   
   void display() {
-    if (getHP() > 150) {
-      image(wallnut, (getRow()+2)*100, (getCol()+1)*100);
+    if (getHP() > 1000) {
+      image(getImg(), (getRow()+2)*100, (getCol()+1)*100);
     } else {
-      image(halfwallnut, (getRow()+2)*100, (getCol()+1)*100);
+      setImg(halfwallnut);
+      image(getImg(), (getRow()+2)*100, (getCol()+1)*100);
     }
   }
   
-  void skill() {
-  }
+  void skill() {}
 }

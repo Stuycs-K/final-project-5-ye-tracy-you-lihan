@@ -1,49 +1,35 @@
 public abstract class Entity {
-  private int row, col, currHP;
+  private int row, col, cost, currHP, atk, startCooldown, cooldown;
   private String name;
-  private int cost;
-  private int ogCooldown, cooldown;
+  private PImage img;
   
-  public Entity(int r, int c, String n, int cost, int hp, int startCooldown, int cooldown) {
+  public Entity(String n, PImage i,int r, int c, int cost, int hp, int atk, int sCD, int CD) {
+    this.name = n;
+    this.img = i;
     this.row = r;
     this.col = c;
-    this.name = n;
     this.cost = cost;
     this.currHP = hp;
-    this.ogCooldown = cooldown;
-    this.cooldown = startCooldown;
+    this.atk = atk;
+    this.startCooldown = sCD;
+    this.cooldown = CD;
   }
   
-  public int getRow() {
-    return row;
-  }
-  public int getCol() {
-    return col;
-  }
-  public String getName() {
-    return name;
-  }
-  public int getCost() {
-    return cost;
-  }
-  public int getHP() {
-    return currHP;
-  }
-  public void setHP(int atk) {
-    currHP -= atk;
-  }
-  public int getOGC() {
-    return ogCooldown;
-  }
-  public int getCooldown() {
-    return cooldown;
-  }
-  public void setCooldown() {
-    cooldown = ogCooldown;
-  }
-  public void minusCooldown() {
-    cooldown -= 1;
-  }
+  public String getName() { return name; }
+  public PImage getImg() { return img; }
+  public int getRow() { return row; }
+  public int getCol() { return col; }
+  public int getCost() { return cost; }
+  public int getHP() { return currHP; }
+  public int getATK() { return atk; }
+  public int getOGC() { return startCooldown; }
+  public int getCooldown() { return cooldown; }
+  
+  public void setImg(PImage x) { img = x; }
+  public void setHP(int atk) { currHP -= atk; }
+  public void setCooldown() { cooldown = startCooldown; }
+  public void setSpecialCD() { cooldown = 5; }
+  public void minusCooldown() { cooldown -= 1; }
   
   public abstract void display();
   public abstract void skill();

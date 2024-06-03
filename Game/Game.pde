@@ -2,15 +2,14 @@ import java.util.*;
 
 static double tick;
 static int suns;
+static Entity[] menu;
 static Entity[][] plants;
 static ArrayList<Zombie> zombies;
 static ArrayList<Lawnmower> lawnmowers;
 static ArrayList<Sun> allSuns;
 static ArrayList<Pea> peas;
-static Entity[] menu;
 
-static boolean activate;
-boolean select;
+boolean activate, select;
 PImage selection;
 
 boolean start;
@@ -29,10 +28,11 @@ static PImage fZombie;
 // -------------------------------------------------------------------------
 
 void draw() 
-{
+{ 
   if (start == false) {
     drawStart();
-  } else {
+  } 
+  else {
     drawBackground();
     drawMenu();
     updateLawnmower();
@@ -54,11 +54,11 @@ void draw()
     for (int i = 0; i < allSuns.size(); i++) {
       Sun s = allSuns.get(i);
       s.display();
-      if (s.stopPoint >= s.pos.y) {
-        s.pos = move(s.pos, s.vel, "D");
+      if (s.getStopPoint() >= s.getY()) {
+        s.setPos(move(s.getPos(), s.getVel(), "D"));
       }
       if (mousePressed) {
-        if (mouseX > s.pos.x && mouseX < s.pos.x+75 && mouseY > s.pos.y && mouseY < s.pos.y+75) {
+        if (mouseX > s.getX() && mouseX < s.getX()+75 && mouseY > s.getY() && mouseY < s.getY()+75) {
           allSuns.remove(s);
           i--;
           suns += 50;
@@ -73,10 +73,10 @@ void draw()
     
     for(int z = 0; z < zombies.size(); z++) {
       Zombie currZomb = zombies.get(z);
-      if(currZomb.pos.x < 220) {
+      if(currZomb.getX() < 220) {
         for (int l = 0; l < lawnmowers.size(); l++) {
           Lawnmower currLawn = lawnmowers.get(l);
-          if (currLawn.pos.y == currZomb.pos.y) {
+          if (currLawn.getY() == currZomb.getY()) {
             currLawn.skill();
             currLawn.activate = true;
           }
@@ -89,37 +89,35 @@ void draw()
     }
   }
   updatePeas();
-  
 }
 
 void setup() 
 {
-  
   frameRate(60);
   size (1200,750);
   activate = false;
 
+  suns = 75;
+  selection = sun;
+  select = false;
+  start = false;
+  plants = new Entity[9][5];
   peas = new ArrayList<Pea>();
+  allSuns = new ArrayList<Sun>();
   lawnmowers = new ArrayList<Lawnmower>();
+  zombies = new ArrayList<Zombie>();
+  
   for(int y = 100; y < 600; y += 100) {
     lawnmowers.add(new Lawnmower(120, y));
   }
-  
-  allSuns = new ArrayList<Sun>();
-  suns = 75;
 
-  plants = new Entity[9][5];
   menu = new Entity[4];
   menu[0] = new Sunflower();
   menu[1] = new Peashooter();
   menu[2] = new Wallnut();
   menu[3] = new Ice();
-  select = false;
-  selection = sun;
-  zombies = new ArrayList<Zombie>();
-  start = false;
   
-  //images for plants and zombies 
+                              //images for plants and zombies 
   sun = loadImage("sun.gif");
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
@@ -141,7 +139,7 @@ void setup()
   fZombie = loadImage("frozenZombie.png");
   fZombie.resize(90, 120);
   
-  // start menu 
+                              // start menu 
   load = loadImage("start.png");
   load.resize((int)(1200*0.6),(int)(750*0.6));
   windows = loadImage("windows.jpg");
@@ -162,13 +160,10 @@ void setup()
   ffox.resize(50,50);
 }
 
-
-
 double getTick()       //  **** When calling a skill every x seconds, call with 
 {                      //  getTick()%x == 0 & keep in mind that it's a double ****
   return tick/60;
 }
-
 
 void drawBackground() 
 {
@@ -211,15 +206,15 @@ void drawBackground()
 }
 
 void updateLawnmower(){
-    for(int l = 0; l < lawnmowers.size(); l++) {
-      if (lawnmowers.get(l).activate) {
-        lawnmowers.get(l).skill();
-      }
-      lawnmowers.get(l).display();
-      if(lawnmowers.get(l).pos.x > 1200) {
-        lawnmowers.remove(l);
-      }
+  for(int l = 0; l < lawnmowers.size(); l++) {
+    if (lawnmowers.get(l).activate) {
+      lawnmowers.get(l).skill();
     }
+    lawnmowers.get(l).display();
+    if(lawnmowers.get(l).getX() > 1200) {
+      lawnmowers.remove(l);
+    }
+  }
 }
 
 void updatePeas() {
@@ -228,13 +223,16 @@ void updatePeas() {
     currPea.display();
     for (int z = 0; z < zombies.size(); z++) {
       Zombie currZomb = zombies.get(z);
-      if (currZomb.pos.x-80 <= currPea.pos.x && currZomb.pos.y == currPea.pos.y) {
-        currZomb.hp = currZomb.hp - 20;
-        if (currZomb.hp <= 0) zombies.remove(z);
+      if (currZomb.getX()-80 <= currPea.getX() && currZomb.getY() == currPea.getY()) {
+        currZomb.setHP(currZomb.getHP() - 20);
+        if (currZomb.getHP() <= 0) {
+          zombies.remove(z);
+        }
         peas.remove(p);
+        p--;
       }
     }
-    currPea.pos = move(currPea.pos, currPea.vel, "R");
+    currPea.setPos(move(currPea.pos, currPea.vel, "R"));
   }
 }
 
@@ -365,7 +363,7 @@ void mouseReleased() {
         if (selection == sunflower) {
           plants[r][c] = new Sunflower(r,c);
           suns -= 50;
-          menu[0].setCooldown();
+          menu[0].setSpecialCD();
         } else if (selection == peashooter) {
           plants[r][c] = new Peashooter(r,c);
           suns -= 100;
@@ -433,8 +431,8 @@ void zombieMove() {
       }
     }
     else {
-      int r = (int)((z.pos.x-200)/100);
-      int c = (int)((z.pos.y-100)/100);
+      int r = (int)((z.getX()-200)/100);
+      int c = (int)((z.getY()-100)/100);
       if (r > -1 && r < 9 && c > -1 && c < 5 && plants[r][c] != null) {
         if (plants[r][c].getName().equals("Ice")) {
           plants[r][c].skill();
@@ -447,7 +445,7 @@ void zombieMove() {
         }
       }
       else if (getTick()%0.5 == 0) {
-        z.pos = move(z.pos, z.vel, "L");
+        z.setPos(move(z.getPos(), z.getVel(), "L"));
       }
     }
     z.display();
@@ -461,7 +459,6 @@ void drawStart() {
   rect(345,105,10+(1200*0.6),20+(750*0.6), 10);
   image(load, 350, 120);
   image(ex, 1025,105);
-  
   image(trash,20,30);
   image(ffox,20,100);
   image(val, 20, 170);
