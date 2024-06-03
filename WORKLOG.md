@@ -58,4 +58,4 @@ Creating an opening screen for the game.
 
 ### 5/30-6/2
 
-Working on and then finished ice plant, caught and fixed some bugs
+Working on and then finished ice plant, caught and fixed some bugs. Fixed syntaxing, changed everything to private instances, getters, and setters.
