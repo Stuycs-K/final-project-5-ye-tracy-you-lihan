@@ -224,6 +224,7 @@ void updatePeas() {
         currZomb.hp = currZomb.hp - 20;
         if (currZomb.hp <= 0) zombies.remove(z);
         peas.remove(p);
+        p--;
       }
     }
     currPea.pos = move(currPea.pos, currPea.vel, "R");
@@ -304,17 +305,17 @@ void mouseClicked() {
     }
     else {
       fill(#ff0000, 150);
-      rect(25, 625, 200, 100);
+      rect(275, 625, 200, 100);
     }
   }  else if (mouseX > 525 && mouseX < 725 && mouseY > 625 && mouseY < 725) {
-    if (suns >= menu[2].getCost()) {
+    if (suns >= menu[2].getCost() && menu[2].getCooldown() == 0) {
       select = true;
       selection = wallnut;
       followMouse(selection);
     }
     else {
       fill(#ff0000, 150);
-      rect(275, 625, 200, 100);
+      rect(525, 625, 200, 100);
     }
   }
 }
