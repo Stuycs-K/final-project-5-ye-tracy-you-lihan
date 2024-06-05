@@ -1,18 +1,6 @@
 import java.util.*;
 
-double tick;
-static int suns;
-static Entity[] menu;
-static Entity[][] plants;
-static ArrayList<Zombie> zombies;
-static ArrayList<Lawnmower> lawnmowers;
-static ArrayList<Sun> allSuns;
-static ArrayList<Pea> peas;
-
-boolean activate, select;
 PImage selection;
-
-boolean start;
 PImage load, windows, ex, file, pVz, mine, val, ffox, trash;
 
 // -------------------------------------------------------------------------
@@ -29,73 +17,13 @@ PImage fZombie;
 
 void draw() 
 { 
-  if (start == false) {
-    drawStart();
-  } 
-  else {
-    drawBackground();
-    drawMenu();
-    updateLawnmower();
-    tick++;
-    cooldown();
-    
-    for (int i = 0; i < plants.length; i++) {
-      for (int j = 0; j < plants[0].length; j++) {
-        if (plants[i][j] != null) { 
-          plants[i][j].display();
-          if (!plants[i][j].getName().equals("Ice")) {
-            plants[i][j].skill();
-          }
-        }
-      }
-    }
-    
-    randomSunDrop();
-    for (int i = 0; i < allSuns.size(); i++) {
-      Sun s = allSuns.get(i);
-      s.display();
-      if (s.getStopPoint() >= s.getY()) {
-        s.setPos(move(s.getPos(), s.getVel(), "D"));
-      }
-      if (mousePressed) {
-        if (mouseX > s.getX() && mouseX < s.getX()+75 && mouseY > s.getY() && mouseY < s.getY()+75) {
-          allSuns.remove(s);
-          i--;
-          suns += 50;
-        }
-      }
-    }
-    
-    if (getTick()%4 == 0) {
-      randomZombieSpawn();
-    }
-    zombieMove();
-    
-    for(int z = 0; z < zombies.size(); z++) {
-      Zombie currZomb = zombies.get(z);
-      if(currZomb.getX() < 220) {
-        for (int l = 0; l < lawnmowers.size(); l++) {
-          Lawnmower currLawn = lawnmowers.get(l);
-          if (currLawn.getY() == currZomb.getY()) {
-            currLawn.skill();
-            currLawn.activate = true;
-          }
-        }
-      }
-     }
   
-    if (select == true) {
-      followMouse(selection);
-    }
-  }
-  updatePeas();
 }
 
 void setup() 
 {
   frameRate(60);
   size (1200,750);
-  activate = false;
 
   suns = 75;
   selection = sun;
@@ -207,7 +135,7 @@ void drawBackground()
 
 void updateLawnmower(){
   for(int l = 0; l < lawnmowers.size(); l++) {
-    if (lawnmowers.get(l).activate) {
+    if (lawnmowers.get(l).getActive()) {
       lawnmowers.get(l).skill();
     }
     lawnmowers.get(l).display();

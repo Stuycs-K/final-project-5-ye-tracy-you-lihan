@@ -11,6 +11,8 @@ class Lawnmower{
   
   public int getX() { return (int)pos.x; }
   public int getY() { return (int)pos.y; }
+  public boolean getActive() { return activate; }
+  public void setActive( boolean x ) { activate = x; }
 
   public void display() {
     image(lawnmower, pos.x, pos.y);
