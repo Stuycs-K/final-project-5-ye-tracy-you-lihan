@@ -1,6 +1,6 @@
 import java.util.*;
 
-static double tick;
+double tick;
 static int suns;
 static Entity[] menu;
 static Entity[][] plants;

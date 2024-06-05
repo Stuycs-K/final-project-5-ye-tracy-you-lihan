@@ -20,7 +20,7 @@ public class Peashooter extends Entity{
   
   void skill() {
     if ((getTick()+tickDelay)%1.5 == 0) {
-      Game.peas.add(new Pea(((getRow()+2)*100)-20, (getCol()+1)*100));
+      PvZ.peas.add(new Pea(((getRow()+2)*100)-20, (getCol()+1)*100));
     }
   }
 }
