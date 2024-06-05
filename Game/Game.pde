@@ -16,15 +16,15 @@ boolean start;
 PImage load, windows, ex, file, pVz, mine, val, ffox, trash;
 
 // -------------------------------------------------------------------------
-static PImage sun;
-static PImage sunflower;
-static PImage lawnmower;
-static PImage peashooter;
-static PImage pea;
-static PImage zombie;
-static PImage wallnut, halfwallnut;
-static PImage ice;
-static PImage fZombie;
+PImage sun;
+PImage sunflower;
+PImage lawnmower;
+PImage peashooter;
+PImage pea;
+PImage zombie;
+PImage wallnut, halfwallnut;
+PImage ice;
+PImage fZombie;
 // -------------------------------------------------------------------------
 
 void draw() 
