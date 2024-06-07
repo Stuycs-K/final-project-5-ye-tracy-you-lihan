@@ -3,7 +3,7 @@ import java.util.*;
 Game PvZ;
 
 PImage selection;
-PImage load, windows, ex, file, pVz, mine, val, ffox, trash;
+PImage load, windows, ex, file, pVz, mine, val, ffox, trash, endscreen;
 
 // -------------------------------------------------------------------------
 PImage sun;
@@ -30,7 +30,7 @@ void setup()
   PvZ = new Game();
   selection = sun;
 
-                              //images for plants and zombies 
+  //images for plants and zombies 
   sun = loadImage("sun.gif");
   sun.resize(75,75);
   sunflower = loadImage("sunflower.png");
@@ -52,7 +52,7 @@ void setup()
   fZombie = loadImage("frozenZombie.png");
   fZombie.resize(90, 120);
   
-                              // start menu 
+  // start menu 
   load = loadImage("start.png");
   load.resize((int)(1200*0.6),(int)(750*0.6));
   windows = loadImage("windows.jpg");
@@ -71,6 +71,11 @@ void setup()
   trash.resize(50,50);
   ffox = loadImage("ffox.png");
   ffox.resize(50,50);
+  
+  //end screen
+  endscreen = loadImage("endScreen.jpg");
+  endscreen.resize(1200, 750);
+
 }
 
 void mouseClicked() {
@@ -81,6 +86,9 @@ void mouseReleased() {
   PvZ.placePlants();
 }
 
+void keyPressed(){
+  PvZ.checkKey();
+}
 // >>>>>>>>>>>>>>>> ask abt this bc its functionally still static <<<<<<<<<<<<<<< //
 
 double getTick() {

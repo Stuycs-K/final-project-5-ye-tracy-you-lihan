@@ -11,7 +11,7 @@ public class Game {
   private ArrayList<Sun> allSuns;
   private ArrayList<Pea> peas;
       /* ----- */
-  private boolean select, start;
+  private boolean select, start, pause, end;
   
   public Game() {
     tick = 0;
@@ -31,6 +31,8 @@ public class Game {
         /* ----- */
     select = false;
     start = false;
+    end = false;
+    pause = false;
         /* ----- */
     for(int y = 100; y < 600; y += 100) {
       lawnmowers.add(new Lawnmower(120, y));
@@ -38,10 +40,12 @@ public class Game {
   }
   
   public void run() {
-    if (start == false) {
+   if (start == false) {
       drawStart();
-    }
-    else {
+    } else if (end == true) {
+      drawEnd();
+    } else if (pause) {
+    } else {
       tick++;
       drawBackground();
       drawMenu();
@@ -56,9 +60,34 @@ public class Game {
       activeLawnmower();
       selected();
       updatePeas();
+      checkDeath();
+    }
+  }
+  void drawEnd() {
+    image(endscreen, 0, 0);
+    if (mousePressed) {
+      if (mouseX > 357 && mouseX < 539 && mouseY > 642 && mouseY < 703) {
+        start = false;
+        end = false;
+        setup();
+      } else if (mouseX > 665 && mouseX < 843 && mouseY > 635 && mouseY < 722) {
+        start = true;
+        end = false;
+        setup();
+      }
+    }
+  }
+  void checkDeath() {
+    for (Zombie z : zombies) {
+      if (z.pos.x < 50) end = true;
     }
   }
   
+  void checkKey() {
+   if (key == 'p'){
+     pause = !(pause);
+   }
+  }
   public void buyPlants() {
     if (mouseX > 25 && mouseX < 225 && mouseY > 625 && mouseY < 725) {
       if (suns >= menu[0].getCost() && menu[0].getCooldown() == 0) {
@@ -167,7 +196,7 @@ public class Game {
     image(mine, 90, 310);
     image(file, 160, 380);
     
-    if (mousePressed && mouseX > 350 && mouseX < 350+(int)(1200*0.6) && mouseY > 120 && mouseY < 120+(int)(750*0.6)) {
+    if (mousePressed && mouseX > 469 && mouseX < 939 && mouseY > 490 && mouseY < 548) {
       start = true;
     }
   }

@@ -7,7 +7,7 @@ public class Zombie{
   
   public Zombie(int x, int y) {
     pos = new PVector(x, y);
-    vel = new PVector(10,0);
+    vel = new PVector(500,0);
     hp = 190;
     atk = 100;
     img = zombie;
