@@ -32,6 +32,6 @@ public abstract class Entity {
   public void minusCooldown() { cooldown -= 1; }
   
   public abstract void display();
-  public abstract void skill();
+  public abstract void skill(ArrayList<Zombie> zombies, ArrayList<Sun> allSuns);
   
 }

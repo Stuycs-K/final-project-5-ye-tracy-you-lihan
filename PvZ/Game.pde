@@ -59,6 +59,94 @@ public class Game {
     }
   }
   
+  public void buyPlants() {
+    if (mouseX > 25 && mouseX < 225 && mouseY > 625 && mouseY < 725) {
+      if (suns >= menu[0].getCost() && menu[0].getCooldown() == 0) {
+        select = true;
+        selection = sunflower;
+        followMouse(selection);
+      } else {
+        fill(#ff0000, 150);
+        rect(25, 625, 200, 100);
+      }
+    } else if (mouseX > 275 && mouseX < 475 && mouseY > 625 && mouseY < 725) {
+      if (suns >= menu[1].getCost() && menu[1].getCooldown() == 0) {
+        select = true;
+        selection = peashooter;
+        followMouse(selection);
+      } else {
+        fill(#ff0000, 150);
+        rect(275, 625, 200, 100);
+      }
+    } else if (mouseX > 525 && mouseX < 725 && mouseY > 625 && mouseY < 725) {
+      if (suns >= menu[2].getCost() && menu[2].getCooldown() == 0) {
+        select = true;
+        selection = wallnut;
+        followMouse(selection);
+      } else {
+        fill(#ff0000, 150);
+        rect(525, 625, 200, 100);
+      }
+    } else if (mouseX > 775 && mouseX < 925 && mouseY > 625 && mouseY < 725) {
+      if (suns >= menu[3].getCost() && menu[3].getCooldown() == 0) {
+        select = true;
+        selection = ice;
+        followMouse(selection);
+      } else {
+        fill(#ff0000, 150);
+        rect(775, 625, 200, 100);
+      }
+    }
+  }
+  
+  public void placePlants() {
+    if (select == true) {
+      if (mouseX > 200 && mouseX < 1100 && mouseY > 100 && mouseY < 600) {
+        int r = (mouseX-200)/100;
+        int c = (mouseY-100)/100;
+        if (plants[r][c] == null) {
+          if (selection == sunflower) {
+            plants[r][c] = new Sunflower(r,c, (int)getTick()%5);
+            suns -= 50;
+            menu[0].setSpecialCD();
+          } else if (selection == peashooter) {
+            plants[r][c] = new Peashooter(r,c, (int)getTick()%5);
+            suns -= 100;
+            menu[1].setCooldown();
+          } else if (selection == wallnut) {
+            plants[r][c] = new Wallnut(r,c);
+            suns -= 100;
+            menu[2].setCooldown();
+          } else if (selection == ice) {
+            plants[r][c] = new Ice(r,c);
+            suns -= 0;
+            menu[3].setCooldown();
+          }
+        }
+      }
+      select = false;
+    }
+  }
+  
+  public PVector move(PVector position, PVector velocity, String dir) {
+    if (dir.equals("L")) {
+      return position.add(PVector.mult(velocity,-1));
+    }
+    else if (dir.equals("R")) {
+      return position.add(velocity);
+    }
+    else if (dir.equals("D")) {
+      return position.add(velocity);
+    }
+    else if (dir.equals("U")) {
+      return position.add(PVector.mult(velocity,-1));
+    }
+    else {
+      println("invalid direction");
+      return position;
+    }
+  }
+  
   // ------------------------------------------------------------------------- //
   // -------------------------- NO TOUCHIE ZONE ------------------------------ //
   // ------------------------------------------------------------------------- //
@@ -177,7 +265,7 @@ public class Game {
   private void updateLawnmower() {
     for(int l = 0; l < lawnmowers.size(); l++) {
       if (lawnmowers.get(l).getActive()) {
-        lawnmowers.get(l).skill();
+        lawnmowers.get(l).skill(zombies);
       }
       lawnmowers.get(l).display();
       if(lawnmowers.get(l).getX() > 1200) {
@@ -206,7 +294,7 @@ public class Game {
         if (plants[i][j] != null) { 
           plants[i][j].display();
           if (!plants[i][j].getName().equals("Ice")) {
-            plants[i][j].skill();
+            plants[i][j].skill(zombies, allSuns);
           }
         }
       }
@@ -257,6 +345,35 @@ public class Game {
     }
   }
   
+  private void zombieMove() {
+  for (Zombie z : zombies) {
+    if (z.getFreeze() > 0) {
+      if (getTick()%1 == 0) {
+        z.setFreeze();
+      }
+    }
+    else {
+      int r = (int)((z.getX()-200)/100);
+      int c = (int)((z.getY()-100)/100);
+      if (r > -1 && r < 9 && c > -1 && c < 5 && plants[r][c] != null) {
+        if (plants[r][c].getName().equals("Ice")) {
+          plants[r][c].skill(zombies, allSuns);
+        }
+        else {
+          z.attack(plants[r][c]);
+        }
+        if (plants[r][c].getHP() == 0) {
+          plants[r][c] = null;
+        }
+      }
+      else if (getTick()%0.5 == 0) {
+        z.setPos(move(z.getPos(), z.getVel(), "L"));
+      }
+    }
+    z.display();
+  }
+}
+  
   private void activeLawnmower() {
     for(int z = 0; z < zombies.size(); z++) {
       Zombie currZomb = zombies.get(z);
@@ -264,7 +381,7 @@ public class Game {
         for (int l = 0; l < lawnmowers.size(); l++) {
           Lawnmower currLawn = lawnmowers.get(l);
           if (currLawn.getY() == currZomb.getY()) {
-            currLawn.skill();
+            currLawn.skill(zombies);
             currLawn.setActive(true);
           }
         }
@@ -297,6 +414,13 @@ public class Game {
       currPea.display();
     }
   }
+  
+  private void followMouse(PImage img) {
+    if (mousePressed) {
+      image(img, mouseX-50, mouseY-50);
+    }
+  }
+  
   
   
   

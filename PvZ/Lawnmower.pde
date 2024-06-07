@@ -18,7 +18,7 @@ class Lawnmower{
     image(lawnmower, pos.x, pos.y);
   }
   
-  public void skill() {
+  public void skill(ArrayList<Zombie> zombies) {
       pos = PvZ.move(pos, vel, "R");
       for (int z = 0; z < PvZ.zombies.size(); z++) {
         if (zombies.get(z).getY() == this.pos.y && zombies.get(z).getX() <= pos.x && zombies.get(z).getY() >= pos.y) {

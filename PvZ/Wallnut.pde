@@ -10,7 +10,7 @@ public class Wallnut extends Entity {
     super("Wallnut", wallnut, r, c, 100, 2000, 0, 10, 10);
   }
   
-  void display() {
+  public void display() {
     if (getHP() > 1000) {
       image(getImg(), (getRow()+2)*100, (getCol()+1)*100);
     } else {
@@ -19,5 +19,5 @@ public class Wallnut extends Entity {
     }
   }
   
-  void skill() {}
+  public void skill(ArrayList<Zombie> zombies, ArrayList<Sun> suns) {}
 }
