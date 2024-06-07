@@ -80,9 +80,3 @@ void mouseClicked() {
 void mouseReleased() {
   PvZ.placePlants();
 }
-
-// >>>>>>>>>>>>>>>> ask abt this bc its functionally still static <<<<<<<<<<<<<<< //
-
-double getTick() {
-  return PvZ.tick/60;
-}

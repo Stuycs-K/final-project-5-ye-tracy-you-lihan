@@ -17,8 +17,8 @@ public class Sunflower extends Entity{
     image(getImg(), (getRow()+2)*100, (getCol()+1)*100);
   }
   
-  public void skill(ArrayList<Zombie> zombies, ArrayList<Sun> allSuns) {
-    if ((getTick()+tickDelay)%5 == 0) {
+  public void skill(ArrayList<Zombie> zombies, ArrayList<Sun> allSuns, double tick) {
+    if ((tick+tickDelay)%5 == 0) {
       if ((int)(Math.random()*2) == 0) {
         allSuns.add(new Sun((getRow()+2)*100+60, (getCol()+1)*100+20, 0, 0));
       }

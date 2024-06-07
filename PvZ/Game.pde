@@ -294,7 +294,7 @@ public class Game {
         if (plants[i][j] != null) { 
           plants[i][j].display();
           if (!plants[i][j].getName().equals("Ice")) {
-            plants[i][j].skill(zombies, allSuns);
+            plants[i][j].skill(zombies, allSuns, getTick());
           }
         }
       }
@@ -357,10 +357,10 @@ public class Game {
       int c = (int)((z.getY()-100)/100);
       if (r > -1 && r < 9 && c > -1 && c < 5 && plants[r][c] != null) {
         if (plants[r][c].getName().equals("Ice")) {
-          plants[r][c].skill(zombies, allSuns);
+          plants[r][c].skill(zombies, allSuns, getTick());
         }
         else {
-          z.attack(plants[r][c]);
+          z.attack(plants[r][c], getTick());
         }
         if (plants[r][c].getHP() == 0) {
           plants[r][c] = null;
@@ -407,7 +407,6 @@ public class Game {
           if (currZomb.hp <= 0) {
             zombies.remove(z);
           }
-          p--;
         }
       }
       currPea.pos = move(currPea.pos, currPea.vel, "R");
@@ -421,7 +420,9 @@ public class Game {
     }
   }
   
-  
+  private double getTick() {
+    return tick/60;
+  }
   
   
   
