@@ -66,3 +66,7 @@ Creating an opening screen for the game.
 ### 5/30-6/2
 
 Working on and then finished ice plant, caught and fixed some bugs. Fixed syntaxing, changed everything to private instances, getters, and setters.
+
+### 6/4-6/7
+
+Worked on changing everything into a Game class. Finished, but previous bug seems to still exist. Please work on that. Also, one static (global) method still exists. Will ask what to do with it.
