@@ -14,6 +14,7 @@ boolean select;
 PImage selection;
 
 boolean start;
+boolean pause;
 boolean end;
 PImage load, windows, ex, file, pVz, mine, val, ffox, trash;
 PImage endscreen;
@@ -34,6 +35,7 @@ void draw()
     drawStart();
   } else if (end == true) {
     drawEnd();
+  } else if (pause) {
   } else {
     drawBackground();
     drawMenu();
@@ -119,7 +121,7 @@ void setup()
   zombies = new ArrayList<Zombie>();
   start = false;
   end = false;
-
+  pause = false;
   //images for plants and zombies
   sun = loadImage("sun.gif");
   sun.resize(75, 75);
@@ -294,6 +296,12 @@ void drawMenu()
       text(x.getCost(), 635, 705);
     }
   }
+}
+
+void keyPressed(){
+ if (key == 'p'){
+   pause = !(pause);
+ }
 }
 
 void mouseClicked() {
