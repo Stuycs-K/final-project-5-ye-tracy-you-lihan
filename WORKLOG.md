@@ -24,7 +24,14 @@ started on peashooter, got the basic mechanics down (shooting and damaging)
 ### 05/29
 finished peashooter, placement works, fixed some merging errors, games work on a basic level
 
+## 05/30 - 05/31
+did some testing, fixed a error with pea placement, merged everything together
 
+## 06/3 - 6/4
+worked on the losing screen and fixed dimensons of clickable area
+
+## 06/5
+add a pause feature
 
 ## Tracy Ye
 
