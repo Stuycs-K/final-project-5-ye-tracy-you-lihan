@@ -45,7 +45,7 @@ public class Game {
     } else if (end == true) {
       drawEnd();
     } else if (pause) {
-      
+      //
     } else {
       checkDeath();
       tick++;
@@ -64,8 +64,8 @@ public class Game {
       updatePeas();
     }
   }
-  
-  
+
+
   public void buyPlants() {
     if (start) {
       if (mouseX > 25 && mouseX < 225 && mouseY > 625 && mouseY < 725) {
@@ -176,7 +176,7 @@ public class Game {
     image(mine, 90, 310);
     image(file, 160, 380);
     
-    if (mousePressed && mouseX > 469 && mouseX < 939 && mouseY > 490 && mouseY < 548) {
+    if (mousePressed && mouseX > 350 && mouseX < 350+(int)(1200*0.6) && mouseY > 120 && mouseY < 120+(int)(750*0.6)) {
       start = true;
     }
   }
@@ -482,9 +482,6 @@ public class Game {
      pause = !(pause);
    }
   }
-  
-  
-  
   
   
 }
