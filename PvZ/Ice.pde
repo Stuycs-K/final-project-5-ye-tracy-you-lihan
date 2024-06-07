@@ -14,7 +14,7 @@ public class Ice extends Entity{
     image(getImg(), (getRow()+2)*100, (getCol()+1)*100);
   }
   
-  public void skill(ArrayList<Zombie> zombies, ArrayList<Sun> suns) {
+  public void skill(ArrayList<Zombie> zombies, ArrayList<Sun> suns, double tick) {
     for (Zombie z : zombies) {
       int myX = (getRow()+2)*100;
       int myY = (getCol()+1)*100;

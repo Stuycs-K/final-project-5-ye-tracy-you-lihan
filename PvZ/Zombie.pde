@@ -28,8 +28,8 @@ public class Zombie{
     image(img, pos.x-45, pos.y-15);
   }
   
-  public void attack(Entity x) {
-    if (getTick()%2 == 0) {
+  public void attack(Entity x, double tick) {
+    if (tick%2 == 0) {
       noStroke();
       fill(#ff0000, 150);
       rect(x.getRow()*100+200, x.getCol()*100+100, 100, 130);

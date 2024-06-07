@@ -19,5 +19,5 @@ public class Wallnut extends Entity {
     }
   }
   
-  public void skill(ArrayList<Zombie> zombies, ArrayList<Sun> suns) {}
+  public void skill(ArrayList<Zombie> zombies, ArrayList<Sun> suns, double tick) {}
 }

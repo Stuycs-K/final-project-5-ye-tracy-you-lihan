@@ -18,8 +18,8 @@ public class Peashooter extends Entity{
   }
   
   
-  void skill(ArrayList<Zombie> zombies, ArrayList<Sun> allSuns) {
-    if ((getTick()+tickDelay)%1.5 == 0) {
+  void skill(ArrayList<Zombie> zombies, ArrayList<Sun> allSuns, double tick) {
+    if ((tick+tickDelay)%1.5 == 0) {
       PvZ.peas.add(new Pea(((getRow()+2)*100)-20, (getCol()+1)*100));
     }
   }
