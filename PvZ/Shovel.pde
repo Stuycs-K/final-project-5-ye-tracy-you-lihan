@@ -1,6 +1,6 @@
 public class Shovel extends Entity{
   public Shovel() {
-    super("Shovel", shovel, -100, -100, 0, 0, 0, 4, 1);
+    super("Shovel", shovel, -100, -100, 0, 0, 0, 20, 13);
   }
   
   public Shovel(int x, int y) {
@@ -12,6 +12,5 @@ public class Shovel extends Entity{
   }
   
   public void skill(ArrayList<Zombie> zombies, ArrayList<Sun> allSuns, double tick) {
-     
   }
 }

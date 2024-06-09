@@ -140,11 +140,12 @@ public class Game {
             plants[r][c] = new Ice(r,c);
             suns -= 0;
             menu[3].setCooldown();
-          } else if (selection == shovel) {
-            //plants[r][c] = new Shovel(r,c);
+          }
+        } else {
+          if (selection == shovel) {
             plants[r][c] = null;
             menu[4].setCooldown();
-          }
+          } 
         }
       }
       select = false;
