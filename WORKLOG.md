@@ -76,3 +76,7 @@ Working on and then finished ice plant, caught and fixed some bugs. Fixed syntax
 ### 6/4-6/7
 
 Worked on changing everything into a Game class. Finished, but previous bug seems to still exist. Please work on that. Also, one static (global) method still exists. Will ask what to do with it.
+
+### 6/9
+
+Added waves, fixed shovel cooldown, added a pause screen image.

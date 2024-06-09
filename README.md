@@ -1,28 +1,57 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/syDSSnTt)
 # APCS2 Final Project
-THIS DOCUMENT IS REQUIRED
+
 ## Group Info
-Member one : Tracy Ye
-Memebr Two : Li Han You
-Group Name : Plants Vs Zombies
+Members : Li Han You & Tracy Ye
+Group Name : Plants VS Zombies
 
 ## Overview
+This is the game Plants VS Zombies recreated on processing. It includes features such as suns randomly dropping from the sky, lawnmowers that activate to protect the house as a last line of defense, zombies that approach in waves, and a set of four plants with unique skills and stats. 
 
+The sunflower plant spawns a sun on either the right or left side of itself every 5 seconds. It is recommended that it is the first plant you place so you can generate enough suns to buy more expensive plants. The peashooter plant releases peas every 1.5 seconds to to damage the approaching zombies. The wallnut plant is a defensive plant with an astounding 2000 hp, allowing you to hold back large waves of zombies and plan your defense as they approach. The ice plant has costs no suns to plant and is able to freeze a zombie in place for 5 seconds. However, every plant has a cooldown that prevents multiple from being placed at once. Keep this in mind as you decide where and when to place a plant. Don't worry if you make a mistake though, as the shovel function can remove a misplaced plant from the field. 
 
 ## Instructions
+
 ### Compling PvZ
-To run our project, just click on the run button on Processing. It will bring up a windows screen with an "application" for PvZ. Click the start button and it will start the acutal game. When you lose the game (zombies get past your plants) you can either restart the game or quit to the menu. 
+There are no extra installations necessary for running our project. Simply click on the opened Plants VS Zombies tab to start the game. If you manage to lose the game, you can restart via the "RETRY" button or, if you are too angry to continue, hit the "EXIT TO MAP" to take a break and cool off. 
 ```
-Retry button = restart game
-Exit to Map button = go back to windows screen
+RETRY = restart the game
+EXIT TO MAP = go back to windows screen
 ```
 
 ### Playing the game
-Our PvZ is the based on the actual PvZ so the features are similar. To place a plant, double click the image and click the tile you want to place it in. Alternatively, you can drag the image to the tile. To pick up suns, just click on the image of the sun. 
+#### Placing plants
+```
+Click on the plant on the menu bar to activate the selection of the plant. Then, either click or drag the plant over to the desired patch.
+```
+#### Collecting suns
+```
+click or drag your cursor over the suns to collect them.
+```
+#### Pause
+``` 
+Press "p" to pause the game
+```
+#### Cheat
+```
+Press "s" to instantly gain 1000 suns.
+```
 
-#### keybind list :
+## TL;DR
+
+#### keybinds :
+```
+Sunflower = generate suns
+Peashooter = attack zombies
+Wallnut = defend
+Ice = freeze zombies
+
+Shovel = remove plants
+lawnmower = kills all zombies in row
+```
+
+#### keybinds :
 ```
 p = pause game
-s = add 1000 suns to your current total
-z = speed up zombies
+s = +1000 suns
 ```
