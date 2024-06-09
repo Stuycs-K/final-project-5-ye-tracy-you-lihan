@@ -27,11 +27,17 @@ finished peashooter, placement works, fixed some merging errors, games work on a
 ## 05/30 - 05/31
 did some testing, fixed a error with pea placement, merged everything together
 
-## 06/3 - 6/4
+## 6/3 - 6/4
 worked on the losing screen and fixed dimensons of clickable area
 
-## 06/5
-add a pause feature
+## 6/5
+added a pause feature
+
+## 6/6
+debugged some issues, quality of life changes
+
+## 6/7 - 6/8
+added shovel feature, plants can be removed now
 
 ## Tracy Ye
 
