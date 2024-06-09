@@ -2,8 +2,9 @@
 # APCS2 Final Project
 
 ## Group Info
-Members : Li Han You & Tracy Ye
-Group Name : Plants VS Zombies
+Members : Li Han You & Tracy Ye\
+Group Name : Plants VS Zombies\
+Link : xxx\
 
 ## Overview
 This is the game Plants VS Zombies recreated on processing. It includes features such as suns randomly dropping from the sky, lawnmowers that activate to protect the house as a last line of defense, zombies that approach in waves, and a set of four plants with unique skills and stats. 
@@ -30,9 +31,12 @@ Press "p" to pause the game
 #### Cheat
 Press "s" to instantly gain 1000 suns.
 
+### Bugs
+Sometimes the ice plant will not recognize a zombie even when it is visually touching it. There is no fix, another zombie will trigger its skill. 
+
 ## TL;DR
 
-#### keybinds :
+#### Functions :
 ```
 Sunflower = generate suns
 Peashooter = attack zombies
