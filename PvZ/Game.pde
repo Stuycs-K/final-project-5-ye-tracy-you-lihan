@@ -17,11 +17,12 @@ public class Game {
     tick = 0;
     suns = 75;
         /* ----- */
-    menu = new Entity[4];
+    menu = new Entity[5];
     menu[0] = new Sunflower();
     menu[1] = new Peashooter();
     menu[2] = new Wallnut();
     menu[3] = new Ice();
+    menu[4] = new Shovel();
         /* ----- */
     plants = new Entity[9][5];
     zombies = new ArrayList<Zombie>();
@@ -104,6 +105,15 @@ public class Game {
           fill(#ff0000, 150);
           rect(775, 625, 200, 100);
         }
+      } else if (mouseX > 1025 && mouseX < 1135 && mouseY > 625 && mouseY < 725) {
+        if (menu[4].getCooldown() == 0) {
+          select = true;
+          selection = shovel;
+          followMouse(selection);
+        } else {
+          fill(#ff0000, 150);
+          rect(1025, 625, 110, 100);
+        }
       }
     }
   }
@@ -130,6 +140,10 @@ public class Game {
             plants[r][c] = new Ice(r,c);
             suns -= 0;
             menu[3].setCooldown();
+          } else if (selection == shovel) {
+            //plants[r][c] = new Shovel(r,c);
+            plants[r][c] = null;
+            menu[4].setCooldown();
           }
         }
       }
@@ -267,7 +281,13 @@ public class Game {
         }
         textSize(50);
         text(x.getCost(), 900, 705);
-      } 
+      } else if (x.getName().equals("Shovel")) {
+        fill(#e6dcc3);
+        rect(1025,625,110,100);
+        fill(0, 100);
+        textSize(22);
+        image(shovel, 1040, 628);
+      }
     }
   }
   
@@ -293,7 +313,11 @@ public class Game {
       }
       noStroke();
       fill(#807061,150);
-      rect(25+250*i, 625, 200, 100*((float)(x.getCooldown())/x.getOGC()));
+      if (x.getName().equals("Shovel")) {
+        rect(25+250*i, 625, 110, 100*((float)(x.getCooldown())/x.getOGC()));
+      } else {
+        rect(25+250*i, 625, 200, 100*((float)(x.getCooldown())/x.getOGC()));
+      }
     }
   }
   
@@ -355,33 +379,33 @@ public class Game {
   }
   
   private void zombieMove() {
-  for (Zombie z : zombies) {
-    if (z.getFreeze() > 0) {
-      if (getTick()%1 == 0) {
-        z.setFreeze();
+    for (Zombie z : zombies) {
+      if (z.getFreeze() > 0) {
+        if (getTick()%1 == 0) {
+          z.setFreeze();
+        }
       }
+      else {
+        int r = (int)((z.getX()-200)/100);
+        int c = (int)((z.getY()-100)/100);
+        if (r > -1 && r < 9 && c > -1 && c < 5 && plants[r][c] != null) {
+          if (plants[r][c].getName().equals("Ice")) {
+            plants[r][c].skill(zombies, allSuns, getTick());
+          }
+          else {
+            z.attack(plants[r][c], getTick());
+          }
+          if (plants[r][c].getHP() == 0) {
+            plants[r][c] = null;
+          }
+        }
+        else if (getTick()%0.5 == 0) {
+          z.setPos(move(z.getPos(), z.getVel(), "L"));
+        }
+      }
+      z.display();
     }
-    else {
-      int r = (int)((z.getX()-200)/100);
-      int c = (int)((z.getY()-100)/100);
-      if (r > -1 && r < 9 && c > -1 && c < 5 && plants[r][c] != null) {
-        if (plants[r][c].getName().equals("Ice")) {
-          plants[r][c].skill(zombies, allSuns, getTick());
-        }
-        else {
-          z.attack(plants[r][c], getTick());
-        }
-        if (plants[r][c].getHP() == 0) {
-          plants[r][c] = null;
-        }
-      }
-      else if (getTick()%0.5 == 0) {
-        z.setPos(move(z.getPos(), z.getVel(), "L"));
-      }
-    }
-    z.display();
   }
-}
   
   private void activeLawnmower() {
     for(int z = 0; z < zombies.size(); z++) {
@@ -473,7 +497,7 @@ public class Game {
   
   private void checkDeath() {
     for (Zombie z : zombies) {
-      if (z.pos.x < 50) end = true;
+      if (z.pos.x < 150) end = true;
     }
   }
   

@@ -15,6 +15,7 @@ PImage zombie;
 PImage wallnut, halfwallnut;
 PImage ice;
 PImage fZombie;
+PImage shovel;
 // -------------------------------------------------------------------------
 
 void draw() 
@@ -51,6 +52,9 @@ void setup()
   ice.resize(90, 90);
   fZombie = loadImage("frozenZombie.png");
   fZombie.resize(90, 120);
+  
+  shovel = loadImage("shovel.png");
+  shovel.resize(90, 90);
   
   // start menu 
   load = loadImage("start.png");
