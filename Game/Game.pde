@@ -430,8 +430,8 @@ void drawStart() {
   image(pVz, 160, 170);
   image(mine, 90, 310);
   image(file, 160, 380);
-  //start button - > rect(469,490, 470, 58);
-  //if (mousePressed && mouseX > 350 && mouseX < 350+(int)(1200*0.6) && mouseY > 120 && mouseY < 120+(int)(750*0.6)) {
+  
+  
   if (mousePressed && mouseX > 469 && mouseX < 939 && mouseY > 490 && mouseY < 548) {
     start = true;
   }

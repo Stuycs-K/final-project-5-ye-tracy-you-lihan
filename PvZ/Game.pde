@@ -520,7 +520,7 @@ public class Game {
   }
   
   private void wave() {
-    if (getTick() > 30 && getTick()%15 == 0) {
+    if (getTick() > 30 && getTick()%20 == 0) {
       println("WAVE INCOMING");
       waveTick = 3;
     }
