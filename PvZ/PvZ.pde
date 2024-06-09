@@ -101,8 +101,3 @@ void mouseReleased() {
 void keyPressed(){
   PvZ.checkKey();
 }
-// >>>>>>>>>>>>>>>> ask abt this bc its functionally still static <<<<<<<<<<<<<<< //
-
-double getTick() {
-  return PvZ.tick/60;
-}
