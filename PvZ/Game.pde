@@ -438,7 +438,9 @@ public class Game {
       for (int z = 0; z < zombies.size(); z++) {
         Zombie currZomb = zombies.get(z);
         if (currZomb.pos.x > intialX && currZomb.pos.x-80 <= currPea.pos.x && currZomb.pos.y == currPea.pos.y) {
-          peas.remove(p);
+          if (peas.size() > 0 && p < peas.size()) {
+            peas.remove(p);
+          }
           currZomb.hp = currZomb.hp - currPea.getATK();
           if (currZomb.hp <= 0) {
             zombies.remove(z);
@@ -464,11 +466,12 @@ public class Game {
     tick = 0;
     suns = 75;
       /* ----- */
-    menu = new Entity[4];
+    menu = new Entity[5];
     menu[0] = new Sunflower();
     menu[1] = new Peashooter();
     menu[2] = new Wallnut();
     menu[3] = new Ice();
+    menu[4] = new Shovel();
         /* ----- */
     plants = new Entity[9][5];
     zombies = new ArrayList<Zombie>();
