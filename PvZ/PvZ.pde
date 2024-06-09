@@ -3,7 +3,7 @@ import java.util.*;
 Game PvZ;
 
 PImage selection;
-PImage load, windows, ex, file, pVz, mine, val, ffox, trash, endscreen, pauseIMG, waveM;
+PImage load, windows, ex, file, pVz, mine, val, ffox, trash, endscreen, pauseIMG, waveM, endTitle;
 
 // -------------------------------------------------------------------------
 PImage sun;
@@ -79,6 +79,8 @@ void setup()
   //end screen
   endscreen = loadImage("endScreen.jpg");
   endscreen.resize(1200, 750);
+  endTitle = loadImage("newEndTitle.png");
+  endTitle.resize(504, 300);
   
   // pause
   pauseIMG = loadImage("pause.png");

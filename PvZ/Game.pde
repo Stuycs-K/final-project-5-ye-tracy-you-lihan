@@ -491,6 +491,12 @@ public class Game {
   
   private void drawEnd() {
     image(endscreen, 0, 0);
+    fill(#000000);
+    rect(290, 290, 620, 60);
+    image(endTitle, 350, 50);
+    fill(#000010);
+    rect(370, 240, 50, 50);
+    rect(570, 644, 80, 80);
     if (mousePressed) {
       if (mouseX > 357 && mouseX < 539 && mouseY > 642 && mouseY < 703) {
         reset();
@@ -519,6 +525,8 @@ public class Game {
     } else if (key == 's' && pause == false) {
       suns += 1000;
       println("+1000 SUNS (cheater)");
+    } else if (key == 'e') {
+      end = true;
     }
   }
   

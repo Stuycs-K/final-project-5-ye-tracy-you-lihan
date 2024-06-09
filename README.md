@@ -30,6 +30,8 @@ Click or drag your cursor over the suns to collect them.
 Press "p" to pause the game
 #### Cheat
 Press "s" to instantly gain 1000 suns.
+#### Endscren
+Press "e" to instantly go to the end screen.
 
 ### Bugs
 Sometimes the ice plant will not recognize a zombie even when it is visually touching it. There is no fix, another zombie will trigger its skill. 
@@ -51,4 +53,5 @@ lawnmower = kills all zombies in row
 ```
 p = pause game
 s = +1000 suns
+e = endscreen
 ```
