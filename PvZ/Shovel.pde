@@ -1,10 +1,10 @@
 public class Shovel extends Entity{
   public Shovel() {
-    super("Shovel", shovel, -100, -100, 0, 0, 0, 20, 13);
+    super("Shovel", shovel, -100, -100, 0, 0, 0, 0, 0);
   }
   
   public Shovel(int x, int y) {
-    super("Shovel", shovel, x, y, 0, 0, 0, 15, 10);
+    super("Shovel", shovel, x, y, 0, 0, 0, 0, 0);
   }
   
   public void display() {
