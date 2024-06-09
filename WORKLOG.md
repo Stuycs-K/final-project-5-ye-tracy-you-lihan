@@ -24,19 +24,19 @@ started on peashooter, got the basic mechanics down (shooting and damaging)
 ### 05/29
 finished peashooter, placement works, fixed some merging errors, games work on a basic level
 
-## 05/30 - 05/31
+### 05/30 - 05/31
 did some testing, fixed a error with pea placement, merged everything together
 
-## 6/3 - 6/4
+### 6/3 - 6/4
 worked on the losing screen and fixed dimensons of clickable area
 
-## 6/5
+### 6/5
 added a pause feature
 
-## 6/6
+### 6/6
 debugged some issues, quality of life changes
 
-## 6/7 - 6/8
+### 6/7 - 6/8
 added shovel feature, plants can be removed now
 
 ## Tracy Ye
