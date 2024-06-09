@@ -23,13 +23,13 @@ EXIT TO MAP = go back to windows screen
 ### Playing the game
 
 #### Placing plants
-    Click on the plant on the menu bar to activate the selection of the plant. Then, either click or drag the plant over to the desired patch.
+Click on the plant on the menu bar to activate the selection of the plant. Then, either click or drag the plant over to the desired patch.
 #### Collecting suns
-    Click or drag your cursor over the suns to collect them.
+Click or drag your cursor over the suns to collect them.
 #### Pause
-    Press "p" to pause the game
+Press "p" to pause the game
 #### Cheat
-    Press "s" to instantly gain 1000 suns.
+Press "s" to instantly gain 1000 suns.
 
 ### Bugs
 Sometimes the ice plant will not recognize a zombie even when it is visually touching it. There is no fix, another zombie will trigger its skill. 
