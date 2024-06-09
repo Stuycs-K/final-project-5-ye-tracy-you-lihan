@@ -13,29 +13,22 @@ The sunflower plant spawns a sun on either the right or left side of itself ever
 ## Instructions
 
 ### Compling PvZ
-There are no extra installations necessary for running our project. Simply click on the opened Plants VS Zombies tab to start the game. If you manage to lose the game, you can restart via the "RETRY" button or, if you are too angry to continue, hit the "EXIT TO MAP" to take a break and cool off. 
+There are no extra installations necessary for running our project. Simply click on the opened Plants VS Zombies window to start the game. If you manage to lose the game, you can restart via the "RETRY" button or, if you are too angry to continue, hit the "EXIT TO MAP" to take a break and cool off. 
 ```
 RETRY = restart the game
 EXIT TO MAP = go back to windows screen
 ```
 
 ### Playing the game
+
 #### Placing plants
-```
 Click on the plant on the menu bar to activate the selection of the plant. Then, either click or drag the plant over to the desired patch.
-```
 #### Collecting suns
-```
-click or drag your cursor over the suns to collect them.
-```
+Click or drag your cursor over the suns to collect them.
 #### Pause
-``` 
 Press "p" to pause the game
-```
 #### Cheat
-```
 Press "s" to instantly gain 1000 suns.
-```
 
 ## TL;DR
 
