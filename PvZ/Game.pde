@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Game {
-  private double tick;
+  private double tick, waveTick;
   private int suns;
       /* ----- */
   private Entity[] menu;
@@ -15,6 +15,7 @@ public class Game {
   
   public Game() {
     tick = 0;
+    waveTick = 0;
     suns = 75;
         /* ----- */
     menu = new Entity[5];
@@ -46,7 +47,7 @@ public class Game {
     } else if (end == true) {
       drawEnd();
     } else if (pause) {
-      //
+      image(pauseIMG, 450, height/4);
     } else {
       checkDeath();
       tick++;
@@ -63,6 +64,7 @@ public class Game {
       activeLawnmower();
       selected();
       updatePeas();
+      wave();
     }
   }
 
@@ -506,12 +508,60 @@ public class Game {
   }
   
   private void checkKey() {
-   if (key == 'p'){
-     pause = !(pause);
-   } else if (key == 's' && pause == false) {
-     suns += 1000;
-   }
+    if (key == 'p'){
+      pause = !(pause);
+      if (pause) {
+        println("PAUSED");
+      }
+      else {
+        println("UNPAUSED");
+      }
+    } else if (key == 's' && pause == false) {
+      suns += 1000;
+      println("+1000 SUNS (cheater)");
+    }
   }
   
+  private void wave() {
+    if (getTick() > 30 && getTick()%20 == 0) {
+      println("WAVE INCOMING");
+      waveTick = 3;
+    }
+    if (waveTick > 0) {
+      image(waveM, 330, 150);
+      if (getTick()%2 == 0) {
+        int x = (int)random(6);
+        if (x == 0) {
+          zombies.add(new Zombie(1200,100));
+          zombies.add(new Zombie(1200,200));
+          zombies.add(new Zombie(1200,500));
+        }
+        else if (x == 1) {
+          zombies.add(new Zombie(1200,200));
+          zombies.add(new Zombie(1200,400));
+        }
+        else if (x == 2) {
+          zombies.add(new Zombie(1200,200));
+          zombies.add(new Zombie(1200,400));
+          zombies.add(new Zombie(1200,500));
+        }
+        else if (x == 3) {
+          zombies.add(new Zombie(1200,300));
+          zombies.add(new Zombie(1200,400));
+        }
+        else if (x == 4) {
+          zombies.add(new Zombie(1200,100));
+          zombies.add(new Zombie(1200,500));
+        }
+        else {
+          zombies.add(new Zombie(1200,100));
+          zombies.add(new Zombie(1200,200));
+          zombies.add(new Zombie(1200,300));
+          zombies.add(new Zombie(1200,500));
+        }
+        waveTick--;
+      }
+    }
+  }
   
 }

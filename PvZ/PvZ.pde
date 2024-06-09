@@ -3,7 +3,7 @@ import java.util.*;
 Game PvZ;
 
 PImage selection;
-PImage load, windows, ex, file, pVz, mine, val, ffox, trash, endscreen;
+PImage load, windows, ex, file, pVz, mine, val, ffox, trash, endscreen, pauseIMG, waveM;
 
 // -------------------------------------------------------------------------
 PImage sun;
@@ -79,6 +79,14 @@ void setup()
   //end screen
   endscreen = loadImage("endScreen.jpg");
   endscreen.resize(1200, 750);
+  
+  // pause
+  pauseIMG = loadImage("pause.png");
+  pauseIMG.resize(300, 300);
+  
+  // wave
+  waveM = loadImage("waveM.png");
+  waveM.resize((int)(waveM.width*0.7), (int)(waveM.height*0.7));
 
 }
 
@@ -92,9 +100,4 @@ void mouseReleased() {
 
 void keyPressed(){
   PvZ.checkKey();
-}
-// >>>>>>>>>>>>>>>> ask abt this bc its functionally still static <<<<<<<<<<<<<<< //
-
-double getTick() {
-  return PvZ.tick/60;
 }
