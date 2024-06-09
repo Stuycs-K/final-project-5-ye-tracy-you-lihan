@@ -505,6 +505,8 @@ public class Game {
   private void checkKey() {
    if (key == 'p'){
      pause = !(pause);
+   } else if (key == 's' && pause == false) {
+     suns += 1000;
    }
   }
   
