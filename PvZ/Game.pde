@@ -525,7 +525,7 @@ public class Game {
     } else if (key == 's' && pause == false) {
       suns += 1000;
       println("+1000 SUNS (cheater)");
-    } else if (key == 'e') {
+    } else if (key == 'e' && start == true) {
       end = true;
     }
   }
