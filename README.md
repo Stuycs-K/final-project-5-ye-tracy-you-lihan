@@ -4,7 +4,7 @@
 ## Group Info
 Members : Li Han You & Tracy Ye\
 Group Name : Plants VS Zombies\
-Link : xxx
+Link : https://drive.google.com/drive/folders/1T3423qBWBiNepOlnoBFNmED7YGAYeVaM
 
 ## Overview
 This is the game Plants VS Zombies recreated on processing. It includes features such as suns randomly dropping from the sky, lawnmowers that activate to protect the house as a last line of defense, zombies that approach in waves, and a set of four plants with unique skills and stats. 
@@ -46,7 +46,7 @@ Wallnut = defend
 Ice = freeze zombies
 
 Shovel = remove plants
-lawnmower = kills all zombies in row
+Lawnmower = kills all zombies in row
 ```
 
 #### keybinds :
